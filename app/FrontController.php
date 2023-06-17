@@ -2,8 +2,8 @@
 
 class FrontController {
 
-        private $page;
-        private $action;
+        private string $page;
+        private string $action;
         private $pageExist;
 
 
@@ -11,8 +11,9 @@ class FrontController {
 
             echo 'entrée dans le constructeur de FrontControlller </br>';
             $this->$page=$pge;
+            echo '$this->$page = '.$this->$page.'</br>';
             $this->$act=$action;
-            $this->$pageExist=['1-1','2-1','3-1'];
+            $this->$pgExist=['1-1','2-1','3-1'];
         
         }
 
@@ -21,22 +22,22 @@ class FrontController {
         
         
         
-        function match() {
+        function matc($pge,$act) {
 
 
-            foreach ($this->$pageExist as $value) {
+            foreach ($this->$pgExist as $value) {
                 echo 'on entre dans le foreach de match </br>';
+                echo '$value = '.$value.'</br>';
+                var_dump($value);
+                //echo'</br> $this->$page est égale à '.var_dump($this->$page).'</br>';
 
-                if ($value == $this->$page.'-'.$this->$action) {
+                if ($value == $pge.'-'.$act) {
                     echo 'on rentre dans le if du foreach de match';
                     return true;
                 }
-                else {
-                    echo ' erreur 404';
-                    return false;
-                }                
-
             }
+        echo' erreur 404 ';
+        return false;    
         }
 
 
