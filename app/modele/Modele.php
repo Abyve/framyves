@@ -13,7 +13,7 @@ class Modele {
         $this->table=$tble;
         $this->cle=$cl;
         echo '$this->table = '.$this->table.'</br>';
-         echo '$this->cle = '.$this->cle.'</br>';
+        echo '$this->cle = '.$this->cle.'</br>';
 
     }
 
@@ -34,7 +34,6 @@ class Modele {
 
     function insert($objet) {
         $conn=$this->connectBDD();
-
         if ( $this->table == 'membres' ) {
            try {
                 $query='INSERT INTO membres(nam,firstname,email,pwd) VALUES (:nam, :firstname, :email, :pwd)';
@@ -71,9 +70,10 @@ class Modele {
     
     }
     function find() {
-        $conn=$this-connectBDD();
+        $conn=$this->connectBDD();
+        if ($this->table == 'membres'){
             try{
-                $query="SELECT * FROM '$this->table' WHERE id='$this->cle'";
+                $query="SELECT * FROM '$this->table' WHERE numuser='$this->cle'";
                 $result=$conn->query($query);
                 return $result;
                 
@@ -84,8 +84,85 @@ class Modele {
 
 
             }
-        
-        
-        
+        }
+        elseif ($this->table == 'images') {
+            try{
+                $query="SELECT * FROM '$this->table' WHERE numimg='$this->cle'";
+                $result=$conn->query($query);
+                return $result;
+                
+            }   
+            catch  (PDOException $e) {
+
+                echo 'Selection échouée : ' . $e->getMessage().'</br>';
+
+
+            }
+        }
+        else {
+
+            echo 'erreur find </br>';
+            return false;
         }
     }
+    
+
+    function update($champs,$data) {
+
+        $conn=$this->connectBDD();
+        if ($this->table=='membres') {
+            try {
+
+                $query="UPDATE '$this->table' SET '$champs=$data' WHERE '$numuser=$this->cle'";
+                return true;
+            }
+            catch (PDOException $e) {
+
+                echo 'Mise à jour échouée : ' . $e->getMessage().'</br>';
+
+            }
+        }
+        elseif ($this->table=='images') {
+
+            try {
+
+                $query="UPDATE '$this->table' SET '$champs=$data' WHERE '$numimg=$this->cle'";
+                return true;
+            }
+            catch (PDOException $e) {
+
+                echo 'Mise à jour échouée : ' . $e->getMessage().'</br>';
+
+            }
+        }
+        else {
+            echo 'erreur update</br>';
+            return false;
+        }
+
+    } 
+    function delete() {
+        $conn=$this->connectBDD();
+        if ($this->table=='membres'){
+            try{
+                $query="DELETE * FROM '$this->table' WHERE '$numuser=$this->cle'";
+            }
+            catch (PDOException $e) {
+                echo 'Supression échouée : ' . $e->getMessage().'</br>';
+            }
+        }
+        elseif ($this->table=='images') {
+            try{
+                $query="DELETE * FROM '$this->table' WHERE '$numimg=$this->cle'";
+            }
+            catch (PDOException $e) {
+                echo 'Supression échouée : ' . $e->getMessage().'</br>';
+            }
+        } 
+        else {
+            echo'echec delete';
+            return false;
+        }
+    }
+
+}
