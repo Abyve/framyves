@@ -75,12 +75,12 @@ class Modele {
         if ($this->table == 'membres'){
             try{
                 $query="SELECT * FROM $this->table WHERE numuser='$this->cle'";
-                echo $query;
+                //echo $query;
 
                 $r=$conn->query($query);
                 $result=$r->fetch();
-                echo 'vardump $result';
-                var_dump($result);
+                //echo 'vardump $result';
+                //var_dump($result);
                 return $result;
                 
             }   
@@ -93,8 +93,9 @@ class Modele {
         }
         elseif ($this->table == 'images') {
             try{
-                $query="SELECT * FROM '$this->table' WHERE numimg='$this->cle'";
-                $result=$conn->query($query);
+                $query="SELECT * FROM $this->table WHERE numimg='$this->cle'";
+                $r=$conn->query($query);
+                $result=$r->fetch();
                 return $result;
                 
             }   
