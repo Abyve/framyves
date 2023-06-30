@@ -33,13 +33,26 @@ class Modele {
     }
 
 
-    function insert($objet) {
+    function insert($object) {
+        //include('../class/Membre.php');
+        //include('../class/Image.php');
         $conn=$this->connectBDD();
+        echo 'on rentre dans insert ';
         if ( $this->table == 'membres' ) {
+            echo 'on rentre dans le if membres </br>';
            try {
-                $query='INSERT INTO membres(nam,firstname,email,pwd) VALUES (:nam, :firstname, :email, :pwd)';
+                //echo'parcours de $object'
+                echo 'on rentre dans le try requete membre </br>';
+                $query='INSERT INTO membres(name, firstname, email, pwd) VALUES (:name, :firstname, :email, :pwd)';
+                echo '$query est égale à '.$query.'<br/>';
                 $q= $conn->prepare($query);
-                $q->execute($objet->nam,$objet->firstname,$objet->email,$objet->pwd);
+                $q->execute([
+                    'name' => $object->getName(),
+                    'firstname' => $object->getFirstName(),
+                    'email' => $object->getEmail(),
+                    'pwd' => $object->getPwd()
+                ]);
+                //$q->execute();
                 return true;
            }
            catch (PDOException $e) {
@@ -51,9 +64,16 @@ class Modele {
         }
         elseif( $this->table == 'images' ) {
             try{
-                $query='INSERT INTO images(nameimg,adressimg) VALUES (:nameimg, :adressimg)';
+                echo 'on rentre dans le try de insert image </br>';
+                $query='INSERT INTO images(numuser, nameimg, adressimg) VALUES (:numuser, :nameimg, :adressimg)';
+                echo '$query est égale à '.$query.'</br>';
                 $q= $conn->prepare($query);
-                $q->execute($objet->nameimg,$objet->adressimg);
+                //$q->execute($object->nameImg,$object->adressImg);
+                $q->execute([
+                    'numuser' => $object->getNumUser(),
+                    'nameimg' => $object->getNameImg(),
+                    'adressimg' => $object->getAdressImg()
+                ]);
                 return true;
             }
             catch (PDOException $e) {
