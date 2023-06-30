@@ -18,7 +18,8 @@ class Modele {
     }
 
     function connectBDD() {
-        include config.php;
+        echo 'on rentre dans connectBDD </br>';
+        include('config.php');
         try {
             $conn = new PDO($dsn, $user, $pwd);
             echo 'connexion à la bdd réussie  </br>';
@@ -73,8 +74,13 @@ class Modele {
         $conn=$this->connectBDD();
         if ($this->table == 'membres'){
             try{
-                $query="SELECT * FROM '$this->table' WHERE numuser='$this->cle'";
-                $result=$conn->query($query);
+                $query="SELECT * FROM $this->table WHERE numuser='$this->cle'";
+                echo $query;
+
+                $r=$conn->query($query);
+                $result=$r->fetch();
+                echo 'vardump $result';
+                var_dump($result);
                 return $result;
                 
             }   
