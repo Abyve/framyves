@@ -188,7 +188,10 @@ class Modele {
         $conn=$this->connectBDD();
         if ($this->table=='membres'){
             try{
-                $query="DELETE * FROM '$this->table' WHERE '$numuser=$this->cle'";
+                $query="DELETE FROM $this->table WHERE numuser = $this->cle";
+                echo ' $query est égale à '.$query.'</br>';
+                //$q=$conn->prepare($query);
+                $conn->exec($query);
             }
             catch (PDOException $e) {
                 echo 'Supression échouée : ' . $e->getMessage().'</br>';
@@ -196,7 +199,8 @@ class Modele {
         }
         elseif ($this->table=='images') {
             try{
-                $query="DELETE * FROM '$this->table' WHERE '$numimg=$this->cle'";
+                $query="DELETE FROM $this->table WHERE numimg= $this->cle";
+                $conn->exec($query);
             }
             catch (PDOException $e) {
                 echo 'Supression échouée : ' . $e->getMessage().'</br>';
