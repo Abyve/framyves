@@ -4,7 +4,12 @@ class Modele {
 
     private $table;
     private $cle;
+//setters
+//getters
+    function getCle() {
 
+        return $this->cle;
+    }
 
 
     function __construct($tble,$cl)
@@ -34,14 +39,11 @@ class Modele {
 
 
     function insert($object) {
-        //include('../class/Membre.php');
-        //include('../class/Image.php');
         $conn=$this->connectBDD();
         echo 'on rentre dans insert ';
         if ( $this->table == 'membres' ) {
             echo 'on rentre dans le if membres </br>';
            try {
-                //echo'parcours de $object'
                 echo 'on rentre dans le try requete membre </br>';
                 $query='INSERT INTO membres(name, firstname, email, pwd) VALUES (:name, :firstname, :email, :pwd)';
                 echo '$query est égale à '.$query.'<br/>';
@@ -52,7 +54,6 @@ class Modele {
                     'email' => $object->getEmail(),
                     'pwd' => $object->getPwd()
                 ]);
-                //$q->execute();
                 return true;
            }
            catch (PDOException $e) {
@@ -134,13 +135,23 @@ class Modele {
     }
     
 
-    function update($champs,$data) {
-
+    function update($champs,$data,$num) {
+        echo 'on rentre dans la methode update </br>';
         $conn=$this->connectBDD();
         if ($this->table=='membres') {
             try {
-
-                $query="UPDATE '$this->table' SET '$champs=$data' WHERE '$numuser=$this->cle'";
+                echo 'on rentre dans le try de la table membres </br>';
+                $query="UPDATE $this->table SET $champs = :data WHERE numuser = :numuser";
+                echo '$query est égale à '.$query.'</br>';
+                echo 'data est égale à '.$data.'</br>';
+                echo '$this->cle est égale à '.$this->cle.'</br>';
+                $q= $conn->prepare($query);
+                echo 'prepare ok </br>';
+                $q->execute(array(
+                    'data' => $data,
+                    'numuser' => $num
+                ));
+                echo '$q est passé </br>';
                 return true;
             }
             catch (PDOException $e) {
@@ -153,7 +164,12 @@ class Modele {
 
             try {
 
-                $query="UPDATE '$this->table' SET '$champs=$data' WHERE '$numimg=$this->cle'";
+                $query="UPDATE $this->table SET $champs=:data WHERE numimg=:numimg";
+                $q=$conn->prepare($query);
+                $q->execute([
+                    'data' => $data,
+                    'numimg'=> $num
+                ]);
                 return true;
             }
             catch (PDOException $e) {
