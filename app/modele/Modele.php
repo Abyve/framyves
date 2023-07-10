@@ -114,7 +114,7 @@ class Modele {
         }
         elseif ($this->table == 'images') {
             try{
-                $query="SELECT * FROM $this->table WHERE numimg='$this->cle'";
+                $query="SELECT * FROM $this->table WHERE numuser='$this->cle'";
                 $r=$conn->query($query);
                 $result=$r->fetch();
                 return $result;
