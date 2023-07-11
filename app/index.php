@@ -1,12 +1,10 @@
 <?php
 ob_start();
-include('app/class/FrontController.php');
+include('app/FrontController.php');
 include('app/modele/Modele.php');
 include('app/class/Membre.php');
 include('app/class/Image.php');
-include('app/class/Vue.php');
-include('app/class/Controleur.php');
-//include('app/class/function/cookie.php');
+include('app/class/cookie.php');
 
 $page=htmlspecialchars(($_GET['page']));
 $action=htmlspecialchars(($_GET['action']));
@@ -15,11 +13,12 @@ $action=htmlspecialchars(($_GET['action']));
  echo '$page = '.$page.' </br> $action = '.$action.' </br>';
 var_dump($page);echo'</br>';
 
-$Fcontroller= new FrontController($page,$action);
-$con= new Controleur($page,$action);
-$cookie=$con->index();
+/*$Fcontroller= new FrontController($page,$action);
+if ($Fcontroller->matc($page,$action)){*/
+    $controller= new Controller();
+    $controller->index();
 
 
-
+//};
 echo '</br>';
 //include('test_modeles.php');
