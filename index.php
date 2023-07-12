@@ -11,15 +11,16 @@ include('app/class/Controleur.php');
 $page=htmlspecialchars(($_GET['page']));
 $action=htmlspecialchars(($_GET['action']));
 
- echo '$_GET[page] = '.$_GET['page'].' </br> $_GET[action] = '.$_GET['action'].' </br>';
+/* echo '$_GET[page] = '.$_GET['page'].' </br> $_GET[action] = '.$_GET['action'].' </br>';
  echo '$page = '.$page.' </br> $action = '.$action.' </br>';
 var_dump($page);echo'</br>';
-
+*/
 $Fcontroller= new FrontController($page,$action);
-$con= new Controleur($page,$action);
-$cookie=$con->index();
+$Fcontroller->matc();
+//$cont= new Controleur($page,$action);
+//$cookie=$cont->index();
 
 
 
-echo '</br>';
+
 //include('test_modeles.php');

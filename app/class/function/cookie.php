@@ -1,7 +1,7 @@
 <?php 
     function cookie() {
-    echo 'on est dans la function cookie </br>';
-    /*$cookie= (isset($_COOKIE['email']) ? htmlspecialchars(trim($_COOKIE['email'])) : '');
+    /*echo 'on est dans la function cookie </br>';
+    $cookie= (isset($_COOKIE['email']) ? htmlspecialchars(trim($_COOKIE['email'])) : '');
     //echo '$cookie au debut du script ='.$cookie.'</br>';
     $error=false;
     $email= (isset($_POST['email']) ? htmlspecialchars(trim($_POST['email'])) : '');

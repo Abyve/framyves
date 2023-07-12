@@ -5,19 +5,19 @@ class Controleur {
 
         function __construct($pg,$act)
         { 
-            echo 'on rentre dans le construct de controleur';
+            //echo 'on rentre dans le construct de controleur';
             $this->page=$pg;
             $this->action=$act;
 
         }
         function index() {
-            echo '</br> on rentre dans la fonction index </br>';
+            //echo '</br> on rentre dans la fonction index </br>';
 
             include 'function/cookie.php' ;
             
             
             $cook=cookie();
-            echo '$cook est égale à : '.$cook.'</br>';
+            //echo '$cook est égale à : '.$cook.'</br>';
             $vue=new Vue($cook);
             echo $vue->affiche();
 
