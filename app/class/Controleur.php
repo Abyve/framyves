@@ -19,7 +19,7 @@ class Controleur {
             $cook=cookie();
             //echo '$cook est égale à : '.$cook.'</br>';
             $vue=new Vue($cook);
-            echo $vue->affiche();
+            echo $vue->accueil();
 
         }
     
@@ -37,6 +37,23 @@ class Controleur {
             $cookie=$_COOKIE['email'];
             include 'vueConnexion.php';
 
+
+        }
+        function inscription()
+        {
+            if (isset($_POST)) {
+
+                $membre=new Membre($_POST['email'],$_POST['nom'],$_POST['prenom'],$_POST['pwd_form']);
+
+                    echo '$membre->name '.$membre->getName().'</br>';
+                    echo '$membre->firstName '.$membre->getFirstName().'</br>';
+                    echo '$membre->email '.$membre->getEmail().'</br>';
+                    echo '$membre->pwd '.$membre->getPwd().'</br>';
+                
+                
+            }
+            $vue=new Vue($cook);
+            echo $vue->inscription();
 
         }
 

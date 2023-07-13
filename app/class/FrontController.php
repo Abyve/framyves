@@ -13,7 +13,7 @@ class FrontController {
             $this->page=$pge;
             //echo '$this->page = '.$this->page.'</br>';
             $this->action=$act;
-            $this->pgExist=['1-1','2-1','3-1'];
+            $this->pgExist=['1-1','2-1','3-1'];//1-1 accueil, 2-1 connexion,
         
         }
 
@@ -38,6 +38,9 @@ class FrontController {
                         case 1 :
                             //$con= new Controleur($page,$action);
                             $match=$con->index();
+                            return true;
+                        case 2 :
+                            $match=$con->inscription();
                             return true;
 
                     }
