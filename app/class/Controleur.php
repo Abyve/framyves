@@ -41,19 +41,37 @@ class Controleur {
         }
         function inscription()
         {
-            if (isset($_POST)) {
+            $error = FALSE;
+            $nom = (isset($_POST['nom'])) ? htmlspecialchars(trim($_POST['nom'])) : '';
+            $prenom = (isset($_POST['prenom'])) ? htmlspecialchars(trim($_POST['prenom'])) : '';
+            $email = (isset($_POST['email'])) ? htmlspecialchars(trim($_POST['email'])) : '';
+            if (!(filter_var($email,FILTER_VALIDATE_EMAIL))) {$email='';};
+            $pwd_form = (isset($_POST['pwd_form'])) ? htmlspecialchars(trim($_POST['pwd_form'])) : '';
+            // Test si des valeures ont été soumisent
+            if (isset($_POST['submit'])) {
+            // Validation des données
+                if ( empty($nom) OR empty($prenom) OR empty($pwd_form) OR empty($email)) {
 
-                $membre=new Membre($_POST['email'],$_POST['nom'],$_POST['prenom'],$_POST['pwd_form']);
+                $error = TRUE;
+
+                }
+            }
+            else {
+
+                
+
+                /*$membre=new Membre($email,$nom,$prenom,$pwd_form);
 
                     echo '$membre->name '.$membre->getName().'</br>';
                     echo '$membre->firstName '.$membre->getFirstName().'</br>';
                     echo '$membre->email '.$membre->getEmail().'</br>';
                     echo '$membre->pwd '.$membre->getPwd().'</br>';
-                
+                    echo '$error = '.var_dump($error).'</br>';
+                */
                 
             }
             $vue=new Vue($cook);
-            echo $vue->inscription();
+            echo $vue->inscription($error,$email,$nom,$prenom,$pwd_form);
 
         }
 

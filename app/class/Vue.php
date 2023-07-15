@@ -46,7 +46,7 @@ class Vue {
                             </p>		
                             </div>
                         </div>
-                    </div>
+                    </div>        
                 </body>
             </html>';
 
@@ -67,63 +67,73 @@ class Vue {
 
     }
 
-    function inscription() {
+    function inscription($err,$email,$nom,$prenom,$pwd_form) {
 
-
+        $error=$err;
         echo $this->corps;
-       echo' <div class="col-12 col-md-10 bg-light">
-            <div id="conteneur">';
+        echo'
+                        <div class="col-12 col-md-10 bg-light">
+            ';
              if (isset($_POST['submit']) AND !$error){
                 echo'
-                    <div>
-                    Toutes les données ont été soumises.
+                            <div>
+                            Toutes les données ont été soumises.
+                            </div>
+                        </div>
                     </div>';
              }
             else {
-                echo'<div>
-                    <form action="index.php-2-1" method="POST">
-                    <label for="email">Email : </label>
-                    <input type="text" id="email" name="email" value="" />';
+        echo'                   <div>
+                                    <form action="index-2-1" method="POST">
+                                    <div>
+                                        <label for="email">Email : </label>
+                                        <input type="text" id="email" name="email" value="'.$email.'"/>
+                                    </div>';
                         if ($error AND empty($email)){
-                            echo'
-                            <div class="erreur">Le champ email est obligatoire</div>
-                            ';
+                echo'
+                                    <div class="erreur">Le champ email est obligatoire
+                                    </div>';
                         }
-                echo'</div>
-                <div>
-                    <label for="nom">Nom : </label>
-                    <input type="text" id="nom" name="nom" value="" />
-                 ';
+        echo'          
+                                
+                                    <div>
+                                        <label for="nom">Nom : </label>
+                                        <input type="text" id="nom" name="nom" value="'.$nom.'" />
+                                    </div>';
                 if ($error AND empty($nom)){
-                echo'<div class="erreur">Le champ nom est obligatoire</div>';
+                echo'               
+                                    <div class="erreur">Le champ nom est obligatoire
+                                    </div>';
                 }
-                echo'</div>
-                <div>
-                    <label for="prenom">Prénom : </label>
-                    <input type="text" id="prenom" name="prenom" value="" />
+        echo '                      <div>
+                                        <label for="prenom">Prénom : </label>
+                                        <input type="text" id="prenom" name="prenom" value="'.$prenom.'" />
+                                    </div>';
+                if ($error AND empty($prenom)) {
+                echo'
+                                    <div class="erreur">Le champ prénom est obligatoire
+                                    </div>
                     ';
-                    if ($error AND empty($prenom)) {
-                        echo'
-                    <div class="erreur">Le champ prénom est obligatoire</div>
-                    ';
-                    }
-                echo'</div>
-                <div>
-                    <label for="pwd_form">Mot de passe </label>
-                    <input type="text" id="pwd_form" name="pwd_form" value="" />
-                 ';
-                if ($error AND empty($pwd_form)){
-                    echo'<div class="erreur">Le champ Mot de passe est obligatoire</div>
-                    
-            </div>';
                 }
-            echo'<div>
-                    <label for="submit">&nbsp;</label>
-                    <input type="submit" name="submit" value="Envoyer" />
-                    </div>
-                    </form>';
-                '</div>
-            </div>';
+        echo'                       <div>
+                                        <label for="pwd_form">Mot de passe </label>
+                                        <input type="text" id="pwd_form" name="pwd_form" value="'.$pwd_form.'" />
+                                    </div>';
+                    if ($error AND empty($pwd_form)){
+                echo'
+                                    <div class="erreur">Le champ Mot de passe est obligatoire
+                                    </div>
+                    ';
+        
+                }
+        echo'                        <div>
+                                        <label for="submit">&nbsp;</label>
+                                        <input type="submit" name="submit" value="Envoyer" />
+                                    </div>
+                                    </form>
+                                </div>
+                            </div> 
+                        </div>   ';
             }
         echo $this->footer;
     }
