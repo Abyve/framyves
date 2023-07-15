@@ -20,14 +20,14 @@ class Vue {
                 <div class="container">
                     <div class="row">
                         <div class="col col-md-12 " id="banner">				
-                           <a href="index.php"> <img class="rounded img-fluid" src="./app/img/banner.png"  alt="Bannière"/></a>
+                           <a href="index-1-1"> <img class="rounded img-fluid" src="./app/img/banner.png"  alt="Bannière"/></a>
                         </div>
                     </div>
                     <div class="row" >
                         <div class="col col-md-2 bg-secondary">
 	                        <div class="mx-auto" >
 		                    <p class="mx-auto">
-			                <a href="inscription.php" >
+			                <a href="index-2-1" >
 				            <img class="rounded img-fluid mt-2"  alt="bouton inscription" src="./app/img/button-inscription.png"/>
 			                </a>				
 			                <a href="connexion.php" >

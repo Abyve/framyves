@@ -12,7 +12,7 @@ class Modele {
     }
 
 
-    function __construct($tble,$cl)
+    function __construct($tble,$cl=null)
     {
         echo 'on entre dans le construct de la class Modele';
         $this->table=$tble;

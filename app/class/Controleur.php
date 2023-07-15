@@ -53,22 +53,19 @@ class Controleur {
                 if ( empty($nom) OR empty($prenom) OR empty($pwd_form) OR empty($email)) {
 
                 $error = TRUE;
-
                 }
-            }
-            else {
-
-                
-
-                /*$membre=new Membre($email,$nom,$prenom,$pwd_form);
+                else
+                {
+                    $membre=new Membre($email,$nom,$prenom,$pwd_form);
 
                     echo '$membre->name '.$membre->getName().'</br>';
                     echo '$membre->firstName '.$membre->getFirstName().'</br>';
                     echo '$membre->email '.$membre->getEmail().'</br>';
                     echo '$membre->pwd '.$membre->getPwd().'</br>';
                     echo '$error = '.var_dump($error).'</br>';
-                */
-                
+                $m=new Modele('membres');
+                $m->insert($membre);
+                }
             }
             $vue=new Vue($cook);
             echo $vue->inscription($error,$email,$nom,$prenom,$pwd_form);
