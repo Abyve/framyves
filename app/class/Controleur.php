@@ -13,14 +13,14 @@ class Controleur {
         function index() {
             //echo '</br> on rentre dans la fonction index </br>';
 
-            include 'function/cookie.php' ;
+            //include 'function/cookie.php' ;
             
             
-            $cook=cookie();
-            //echo '$cook est égale à : '.$cook.'</br>';
-            $vue=new Vue($cook);
+            $cook=$this->connexion();
+            echo '$cook est égale à : '.$cook.'</br>';
+           /* $vue=new Vue($cook);
             echo $vue->accueil();
-
+            */
         }
     
         function galerie() {
@@ -71,6 +71,45 @@ class Controleur {
             echo $vue->inscription($error,$email,$nom,$prenom,$pwd_form);
 
         }
+
+        function connexion() {
+       
+        $cookie= (isset($_COOKIE['email']) ? htmlspecialchars(trim($_COOKIE['email'])) : '');
+        //echo '$cookie au debut du script ='.$cookie.'</br>';
+        $error=false;
+        $email= (isset($_POST['email']) ? htmlspecialchars(trim($_POST['email'])) : '');
+        if (!(filter_var($email,FILTER_VALIDATE_EMAIL))) {$email='';};
+        $pwd_connexion= (isset($_POST['pwd_connexion']) ? htmlspecialchars(trim($_POST['pwd_connexion'])) : '');
+        //echo 'email soumis au debut du script ='.$email.'</br>';
+        if (isset($_POST['submit'])) {
+            // Validation des données
+                if (empty($pwd_form) OR empty($email)) {
+
+                $error = TRUE;
+                }
+            }
+        
+        if (empty($_POST['submit']) AND empty($cookie)) {
+            $v=new Vue();
+            $v->connexion($error,$email,$pwd_connexion);
+
+        }
+        elseif (isset($cookie) AND (empty($_POST['submit']))) {
+            //header('Location:index-1-1');
+            return $cookie;
+            exit;
+        }
+        else { 
+           // echo' cookie n\'est pas présent';
+            $v=new Vue();
+            $v->connexion($error,$email,$pwd_connexion);
+        }
+        //$error=pas_de_cookie($error,$email,$pwd_connexion);
+        //echo '$error après traitement function pas_de_cookie = '.$error.'</br>';
+        //echo 'après traitement $cookie = '.$cookie.'</br>';
+        //echo 'après traitement $email = '.$email.'</br>';
+        ob_end_flush();
+    }
 
 
 

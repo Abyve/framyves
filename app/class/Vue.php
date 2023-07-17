@@ -4,7 +4,7 @@ class Vue {
     private $cookie;
     private $corps;
     private $footer;
-    function __construct($cook) {
+    function __construct($cook=null) {
        // echo 'on rentre dans la fonction construct de vue';
         $this->cookie=$cook;
         $this->corps='<!DOCTYPE html>
@@ -136,6 +136,58 @@ class Vue {
                         </div>   ';
             }
         echo $this->footer;
+    }
+
+    function connexion($error=false,$email='',$pwd_connexion='') {
+        
+        
+        echo $this->corps;
+        echo'
+                        <div class="col-12 col-md-10 bg-light">
+            ';
+            if (isset($_POST['submit']) AND !$error){
+            echo '  <div>
+                    Toutes les données ont été soumises.
+                    </div>
+                </div>
+                    ';
+                }
+
+            else {
+                echo'<div>
+                        <form action="index-3-1" method="POST">';
+                        
+                echo'       <div>
+                                <label for="email">Email : </label>
+                                 <input type="text" id="email" name="email" value="'.$email.'" />';
+                                if ($error AND empty($email)){
+                                echo'<div class="erreur">Le champ email est obligatoire</div>';
+                            }
+                             echo'</div>';
+                echo'       <div>
+                                <label for="pwd_connexion">Mot de passe </label>
+                                <input type="text" id="pwd_connexion" name="pwd_connexion" value="'.$pwd_connexion.'" />';
+                                if ($error AND empty($pwd_connexion)){
+                                echo'<div class="erreur">Le champ Mot de passe est obligatoire</div>
+                            ';
+                            }       
+                echo'        </div>
+                            <div>
+                                 <label for="submit"></label>
+                                <input type="submit" name="submit" value="Envoyer" />
+                            </div>
+                         </form>
+                    </div>
+                </div>
+            </div>';
+            }
+            echo $this->footer;
+
+
+
+
+
+
     }
 
 

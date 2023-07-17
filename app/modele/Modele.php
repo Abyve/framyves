@@ -212,4 +212,55 @@ class Modele {
         }
     }
 
+    function pas_de_cookie($error,$email,$pwd_connexion) {
+
+        include 'config.php';
+            
+        
+    
+        if ($_POST['submit']) {
+            if (empty($email) OR  empty($pwd_connexion)){
+                $error=true;
+                return $error;
+                
+                }
+            else {
+            
+                include 'modele/connect_bdd.php';
+    
+                $query=" SELECT email,pwd FROM membres WHERE email='$email';"; 
+    
+                try {
+                
+                    $count = $conn->query($query);
+                    foreach ($count as $row) {
+                        //echo 'email en base de donnée = '.$row['email'].'</br>';
+                        //echo 'mot de passe en base de donnée '.$row['pwd'].'</br>';
+                        if (($row['pwd']==$pwd_connexion) AND ($row['email']==$email)) {
+    
+                            echo 'connexion réussi </br>';
+                            setcookie('email',$email,time()+3600);
+                          //  echo 'cookie créé = '.$_COOKIE['email'].'</br>';
+                            header('Location:'.$_SERVER['PHP_SELF'].'/../bienvenue2.php');
+            
+                        }  
+                        
+                    
+                    }
+    
+                
+                }
+                catch (PDOException $e) {
+                    echo 'la requete a echoué : ' . $e->getMessage();        
+                }
+                
+            
+            }
+            echo 'identifiant et mot de pase incorrectes </br>';
+            $error=true;
+            return $error;
+        }
+        
+    }
+
 }

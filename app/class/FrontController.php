@@ -42,6 +42,9 @@ class FrontController {
                         case 2 :
                             $match=$con->inscription();
                             return true;
+                        case 3 :
+                            $match=$con->connexion();
+                            return true;
 
                     }
                     
