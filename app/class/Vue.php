@@ -30,7 +30,7 @@ class Vue {
 			                <a href="index-2-1" >
 				            <img class="rounded img-fluid mt-2"  alt="bouton inscription" src="./app/img/button-inscription.png"/>
 			                </a>				
-			                <a href="connexion.php" >
+			                <a href="index-3-1" >
 				            <img class="rounded img-fluid mt-2" alt="bouton connexion"  src="./app/img/button-connexion.png"/>
 			                </a>
 							</div>
@@ -181,7 +181,7 @@ class Vue {
                 </div>
             </div>';
             }
-            echo $this->footer;
+            echo '$_COOKIE est égale à '.$_COOKIE['email'].$this->footer;
 
 
 

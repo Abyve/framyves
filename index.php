@@ -22,5 +22,5 @@ $Fcontroller->matc();
 
 
 
-
+//ob_end_flush();
 //include('test_modeles.php');

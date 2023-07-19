@@ -214,10 +214,10 @@ class Modele {
 
     function pas_de_cookie($error,$email,$pwd_connexion) {
 
-        include 'config.php';
+       // include 'config.php';
             
         
-    
+    /*
         if ($_POST['submit']) {
             if (empty($email) OR  empty($pwd_connexion)){
                 $error=true;
@@ -225,8 +225,8 @@ class Modele {
                 
                 }
             else {
-            
-                include 'modele/connect_bdd.php';
+            */
+                $conn=$this->connectBDD();
     
                 $query=" SELECT email,pwd FROM membres WHERE email='$email';"; 
     
@@ -240,8 +240,11 @@ class Modele {
     
                             echo 'connexion réussi </br>';
                             setcookie('email',$email,time()+3600);
-                          //  echo 'cookie créé = '.$_COOKIE['email'].'</br>';
-                            header('Location:'.$_SERVER['PHP_SELF'].'/../bienvenue2.php');
+                            ob_end_flush();
+                            echo 'cookie créé = '.$_COOKIE['email'].'</br>';
+                            $cookie=$_COOKIE['email'];
+                            var_dump($_COOKIE['email']);
+                            return true;
             
                         }  
                         
@@ -255,7 +258,7 @@ class Modele {
                 }
                 
             
-            }
+            //}
             echo 'identifiant et mot de pase incorrectes </br>';
             $error=true;
             return $error;
@@ -263,4 +266,3 @@ class Modele {
         
     }
 
-}
