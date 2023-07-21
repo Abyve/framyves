@@ -147,9 +147,13 @@ class Vue {
             ';
             if (isset($_POST['submit']) AND !$error){
             echo '  <div>
-                    Toutes les données ont été soumises.
+                    '. header('location:index-1-1').';
+                    Connexion réussi!! 
+                    Lien vers la page d\'accueil
+                    <a href="index-1-1">Accueil</a>
                     </div>
                 </div>
+            </div>
                     ';
                 }
 
@@ -179,7 +183,8 @@ class Vue {
                          </form>
                     </div>
                 </div>
-            </div>';
+            </div>
+        ';
             }
             echo '$_COOKIE est égale à '.$_COOKIE['email'].$this->footer;
 

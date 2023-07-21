@@ -86,7 +86,7 @@ class Controleur {
                 echo ' on rentre dans le if de empty cookie </br>';
                 if (isset($_POST['submit'])) {
                 // Validation des données
-                    if (empty($pwd_form) OR empty($email)) {
+                    if (empty($pwd_connexion) OR empty($email)) {
                         $error = TRUE;
                 //$m= new Modele('membres');
                         /*$v= new Vue();
@@ -102,6 +102,10 @@ class Controleur {
                     $vu->connexion();*/ 
                 }
             }
+            else    {
+                header('location:index-1-1');
+                }
+            
             
              
             //$v= new Vue($cookie);
