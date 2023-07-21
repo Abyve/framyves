@@ -16,7 +16,7 @@ $action=htmlspecialchars(($_GET['action']));
 var_dump($page);echo'</br>';
 */
 $Fcontroller= new FrontController($page,$action);
-$Fcontroller->matc();
+$Fcontroller->match();
 //$cont= new Controleur($page,$action);
 //$cookie=$cont->index();
 

@@ -13,7 +13,7 @@ class FrontController {
             $this->page=$pge;
             //echo '$this->page = '.$this->page.'</br>';
             $this->action=$act;
-            $this->pgExist=['1-1','2-1','3-1'];//1-1 accueil, 2-1 connexion,
+            $this->pgExist=['1-1','2-1','3-1','4-1'];//1-1 accueil, 2-1 connexion,
         
         }
 
@@ -22,7 +22,7 @@ class FrontController {
         
         
         
-        function matc() {
+        function match() {
 
 
             foreach ($this->pgExist as $value) {
@@ -45,7 +45,9 @@ class FrontController {
                         case 3 :
                             $match=$con->connexion();
                             return true;
-
+                        case 4 :
+                            $match=$con->fichier();
+                            return true;
                     }
                     
                     

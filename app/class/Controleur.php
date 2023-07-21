@@ -19,7 +19,7 @@ class Controleur {
             //$cook=$this->connexion();
             echo '$cook est égale à : '.$cook.'</br>';
             $vue=new Vue($cookie);
-            echo $vue->accueil($cookie);
+            echo $vue->index($cookie);
             //ob_end_flush();
         }
     
@@ -124,5 +124,46 @@ class Controleur {
         //echo 'après traitement $email = '.$email.'</br>';
         ob_end_flush();
     }
+    function fichier() {
+        $cookie=(isset($_COOKIE['email']) ? htmlspecialchars(trim($_COOKIE['email'])) : '');
+        echo '$cookie = '.$cookie.'</br>';
+        if (!file_exists('upload')) {
 
+            mkdir('upload',0776);
+
+        }
+        if (isset($_FILES['upload_files'])) {
+            
+            
+            $dossier='upload/'.$cookie.'/';
+            echo '$dossier = '.$dossier;
+            if (!file_exists($dossier)) {
+
+                mkdir($dossier,0776);
+    
+            }
+            $fichier=basename($_FILES['upload_files']['name']);
+            $max_file_size=100000;
+            if (filesize($_FILES['upload_files']['tmp_name'])>$max_file_size)
+            {
+                $result='Fichier trop volumineux';
+            }
+            elseif (move_uploaded_file($_FILES['upload_files']['tmp_name'],$dossier.$fichier))
+            {
+                $result='Upload réussi';
+                #include 'ajout  image en bdd'
+            }
+            else
+            {   
+                $result='Echec transfert fichier';   
+            }
+        }
+        
+        $v= new Vue($cookie);
+        $v->fichier($result);
+            
+        
+        
+    }
 }
+

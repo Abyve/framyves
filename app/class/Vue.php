@@ -51,10 +51,11 @@ class Vue {
             </html>';
 
     }
-    function accueil(){
+    function index(){
 
         $resultat='<div class="col-12 col-md-10 bg-light">
                         <h1>Bienvenue '.$this->cookie.'</h1>
+                        </br>
                         </div>
                     </div>    
                    '; 
@@ -193,6 +194,29 @@ class Vue {
 
 
 
+    }
+
+    function fichier($result) {
+        echo $this->corps;
+        echo'
+        <div class="col-12 col-md-10 bg-light">
+        ';
+        if (isset($result)) {
+            echo $result.'</div>
+            </div>';
+        }
+        else {
+            echo'
+                <form method="POST" action="index-4-1" enctype="multipart/form-data" >
+                <label for="upload_files"> Veuilliez choisir un fichier image a importer</label>
+                <input type="hidden" name="MAX_VALUE_FILES" value="100000">
+                <input type="file" name="upload_files" id="upload_files">
+                <input type="submit" value="Envoyer" name="envoyer">
+                </form>
+            </div>
+            </div>';
+        }
+        echo $this->footer;
     }
 
 
