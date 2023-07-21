@@ -74,43 +74,46 @@ class Controleur {
 
         function connexion() {
        
-        $cookie= (isset($_COOKIE['email']) ? htmlspecialchars(trim($_COOKIE['email'])) : '');
-        //echo '$cookie au debut du script ='.$cookie.'</br>';
-        $error=false;
-        $email= (isset($_POST['email']) ? htmlspecialchars(trim($_POST['email'])) : '');
-        if (!(filter_var($email,FILTER_VALIDATE_EMAIL))) {$email='';};
-        $pwd_connexion= (isset($_POST['pwd_connexion']) ? htmlspecialchars(trim($_POST['pwd_connexion'])) : '');
-        //echo 'email soumis au debut du script ='.$email.'</br>';
-        if (isset($_POST['submit'])) {
-            // Validation des données
-            if (empty($pwd_form) OR empty($email)) {
-            $error = TRUE;
-            }
+            $cookie= (isset($_COOKIE['email']) ? htmlspecialchars(trim($_COOKIE['email'])) : '');
+            //echo '$cookie au debut du script ='.$cookie.'</br>';
+            $error=false;
+            $email= (isset($_POST['email']) ? htmlspecialchars(trim($_POST['email'])) : '');
+            if (!(filter_var($email,FILTER_VALIDATE_EMAIL))) {$email='';};
+            $pwd_connexion= (isset($_POST['pwd_connexion']) ? htmlspecialchars(trim($_POST['pwd_connexion'])) : '');
+            //echo 'email soumis au debut du script ='.$email.'</br>';
             
-        
             if (empty($cookie)) {
-                $m=new Modele('membres');
-                $cookie=$m->pas_de_cookie($error,$email,$pwd_connexion);
-                echo '$cookie est égale à '.$cookie.'</br>';
-
-            }
-            else {
-                $vu = new Vue($cookie) ;
-                $vu->accueil(); 
-
-            }
-        }
-        else { 
-            if (isset($cookie)) {
-                echo 'on rentre dans le if du else';
-                $v=new Vue($cookie);
-                $v->accueil();
+                echo ' on rentre dans le if de empty cookie </br>';
+                if (isset($_POST['submit'])) {
+                // Validation des données
+                    if (empty($pwd_form) OR empty($email)) {
+                        $error = TRUE;
+                //$m= new Modele('membres');
+                        /*$v= new Vue();
+                        $v->connexion($error,$email,$pwd_connexion);
+                        */
+                    }
+                    
+                    echo 'on est dans le if de isset $_post sans $ error </br>';
+                    $m=new Modele('membres');
+                    $m->pas_de_cookie($error,$email,$pwd_connexion);
+                    echo '$cookie est égale à '.$cookie.'</br>';
+                    /*$vu = new Vue($cookie) ;
+                    $vu->connexion();*/ 
+                }
             }
             
-        $v=new Vue($cookie);
-        $v->connexion($error,$email,$pwd_connexion);
+             
+            //$v= new Vue($cookie);
+            //$v->accueil();
             
-        }
+            $v= new Vue();
+            $v->connexion($error,$email,$pwd_connexion);
+                
+            //$v=new Vue($cookie);
+            //$v->connexion($error,$email,$pwd_connexion);
+                
+        
         //$error=pas_de_cookie($error,$email,$pwd_connexion);
         //echo '$error après traitement function pas_de_cookie = '.$error.'</br>';
         //echo 'après traitement $cookie = '.$cookie.'</br>';

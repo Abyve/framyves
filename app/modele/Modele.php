@@ -240,7 +240,7 @@ class Modele {
     
                             echo 'connexion réussi </br>';
                             setcookie('email',$email,time()+3600);
-                            ob_end_flush();
+                           // ob_end_flush();
                             echo 'cookie créé = '.$_COOKIE['email'].'</br>';
                             $cookie=$_COOKIE['email'];
                             var_dump($_COOKIE['email']);
