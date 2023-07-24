@@ -15,11 +15,14 @@ class Controleur {
 
             //include 'function/cookie.php' ;
             
-            $cookie=$_COOKIE['email'];
+            $cookie=(isset($_COOKIE['email'])) ? htmlspecialchars(trim($_COOKIE['email'])) : '';
             //$cook=$this->connexion();
-            echo '$cook est égale à : '.$cook.'</br>';
-            $vue=new Vue($cookie);
-            echo $vue->index($cookie);
+            echo '$cookie est égale à : '.$cookie.'</br>';
+            //$vue=new Vue($cookie);
+            $m = new Modele('membres');     // on créé un objet membre
+            $membre=$m->getMembre($cookie);echo $membre;
+            $vue= new Vue($cookie,$membre);
+            $vue->index($cookie,$membre);
             //ob_end_flush();
         }
     
@@ -103,6 +106,8 @@ class Controleur {
                 }
             }
             else    {
+               
+                
                 header('location:index-1-1');
                 }
             
@@ -126,10 +131,11 @@ class Controleur {
     }
     function fichier() {
         $cookie=(isset($_COOKIE['email']) ? htmlspecialchars(trim($_COOKIE['email'])) : '');
+        $cookie='test@test';
         echo '$cookie = '.$cookie.'</br>';
-        if (!file_exists('upload')) {
+        if (!file_exists('upload/')) {
 
-            mkdir('upload',0776);
+            mkdir('upload');
 
         }
         if (isset($_FILES['upload_files'])) {
@@ -139,7 +145,7 @@ class Controleur {
             echo '$dossier = '.$dossier;
             if (!file_exists($dossier)) {
 
-                mkdir($dossier,0776);
+                mkdir($dossier);
     
             }
             $fichier=basename($_FILES['upload_files']['name']);

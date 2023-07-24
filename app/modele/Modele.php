@@ -6,11 +6,7 @@ class Modele {
     private $cle;
 //setters
 //getters
-    function getCle() {
-
-        return $this->cle;
-    }
-
+    
 
     function __construct($tble,$cl=null)
     {
@@ -263,6 +259,36 @@ class Modele {
             $error=true;
             return $error;
         }
+
+        function getMembre($email) {
+            $conn=$this->connectBDD();
+            echo 'on rentre dans getMembre </br>';
+            echo '$email est  égale à '.$email.'</br>';
+            try{
+                echo  'on rentre dans le try de membres </br>';
+                $query="SELECT * FROM membres WHERE email='$email'";
+                echo '$query est égale à '.$query.'</br>';
+                $r=$conn->query($query);
+                echo '$r est égale à ';
+                var_dump($r);
+                //$result=$r->fetch();
+                foreach ($r as $row) {
+                    echo 'numuser est égale à '.$row['numuser'].'</br>';
+                    $membre=new Membre($row['numuser'],$row['name'],$row['firstname'],$row['email'],$row['pwd']);
+                    return $membre;
+                    
+                }
+                unset($row);
+                //return $result;
+    
+    
+            }
+            catch (PDOException $e) {
+                
+                echo 'Requete échouée : ' . $e->getMessage().'</br>';        
+            };
+        }
+    
         
     }
 

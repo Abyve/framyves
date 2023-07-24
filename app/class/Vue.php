@@ -1,12 +1,14 @@
 <?php
 
 class Vue {
+    private $membre;
     private $cookie;
     private $corps;
     private $footer;
-    function __construct($cook=null) {
+    function __construct($cook=null,$membre) {
        // echo 'on rentre dans la fonction construct de vue';
         $this->cookie=$cook;
+        $this->membre=$membre;
         $this->corps='<!DOCTYPE html>
         <html lang="fr">
             <head>
@@ -55,13 +57,14 @@ class Vue {
 
         $resultat='<div class="col-12 col-md-10 bg-light">
                         <h1>Bienvenue '.$this->cookie.'</h1>
+                        '.$this->membre.'
                         </br>
                         </div>
                     </div>    
                    '; 
                // echo ' </br> fichier courant'.$_SERVER['PHP_SELF'].'</br>';*/
                 //$resultat = 'page retournee </br>' ;
-                return $this->corps.$resultat.$this->footer;
+                echo $this->corps.$resultat.$this->footer;
 
 
 

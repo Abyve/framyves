@@ -5,16 +5,16 @@
 #
 class Membre {
 
-   # private $_numUser;
+   private $numUser;
     private $name;
     private $firstName;
     private $email;
     private $pwd;
 
-    function __construct($n, $f, $e, $p)
+    function __construct($numU,$n, $f, $e, $p)
     {
         echo 'on rentre dans le construct de Membre </br>';
-        #$this->_numUser=$_numUser;
+        $this->numUser=$numU;
         $this->name=$n;
         $this->firstName=$f;
         $this->email=$e;
@@ -60,6 +60,15 @@ class Membre {
     function getPwd()
     {
        return $this->pwd;
+    }
+
+    function __toString() {
+
+        return ' le membre a pour numuser '.$this->numUser.' </br>
+        a pour name '.$this->name.' </br>
+        a pour firstname '.$this->firstName.'</br>
+        a pour email '.$this->email.'</br>';
+
     }
 
 
