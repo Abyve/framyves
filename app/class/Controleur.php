@@ -171,5 +171,17 @@ class Controleur {
         
         
     }
+
+    function deconnexion() {
+
+        setcookie('email',$email,time()-3600);
+        echo 'on rentre dans la fonction deconnexion </br>';
+        $v =new Vue();
+        header("location:index-1-1");
+
+        
+
+
+    }
 }
 

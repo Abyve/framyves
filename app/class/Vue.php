@@ -5,7 +5,7 @@ class Vue {
     private $cookie;
     private $corps;
     private $footer;
-    function __construct($cook=null,$membre) {
+    function __construct($cook=null,$membre='') {
        // echo 'on rentre dans la fonction construct de vue';
         $this->cookie=$cook;
         $this->membre=$membre;
@@ -35,8 +35,9 @@ class Vue {
 			                <a href="index-3-1" >
 				            <img class="rounded img-fluid mt-2" alt="bouton connexion"  src="./app/img/button-connexion.png"/>
 			                </a>
-							</div>
-                        </div>';
+                       
+                        </div> 
+                    </div>';
             $this->footer=  '<div class="row bg-danger">		
                             <div class="col-8 md-2">			
                             <p>Réalisé en 2023 par Yves Abiven au sein du CNAM 
@@ -53,18 +54,25 @@ class Vue {
             </html>';
 
     }
-    function index(){
+    function index($deconnexion=false){
+
 
         $resultat='<div class="col-12 col-md-10 bg-light">
                         <h1>Bienvenue '.$this->cookie.'</h1>
                         '.$this->membre.'
                         </br>
-                        </div>
-                    </div>    
+                    </div>
+                    
                    '; 
+        if ($deconnexion) {
+            $div='
+                        <a href="index-5-1"> Deconnexion </a>    
+                   ';
+                }
+        
                // echo ' </br> fichier courant'.$_SERVER['PHP_SELF'].'</br>';*/
                 //$resultat = 'page retournee </br>' ;
-                echo $this->corps.$resultat.$this->footer;
+                echo $this->corps.$resultat.$div.'</div>'.$this->footer;
 
 
 

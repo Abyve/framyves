@@ -13,7 +13,7 @@ class FrontController {
             $this->page=$pge;
             //echo '$this->page = '.$this->page.'</br>';
             $this->action=$act;
-            $this->pgExist=['1-1','2-1','3-1','4-1'];//1-1 accueil, 2-1 connexion,
+            $this->pgExist=['1-1','2-1','3-1','4-1','5-1'];//1-1 accueil, 2-1 connexion,
         
         }
 
@@ -26,11 +26,11 @@ class FrontController {
 
 
             foreach ($this->pgExist as $value) {
-               /* echo 'on entre dans le foreach de match </br>';
+                echo 'on entre dans le foreach de match </br>';
                 echo '$value = '.$value.'</br>';
                 var_dump($value);
                 echo'</br> $this->page est égale à '.$this->page.'</br>';
-                */
+                
                 if (($value == $this->page.'-'.$this->action) AND !isset($con)){
                     //echo 'on rentre dans le if du foreach de match';
                     $con= new Controleur($this->page,$this->action);
@@ -48,6 +48,9 @@ class FrontController {
                         case 4 :
                             $match=$con->fichier();
                             return true;
+                        case 5 :
+                            $match=$con->deconnexion($deconnexion);
+                        
                     }
                     
                     
