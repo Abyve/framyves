@@ -45,6 +45,10 @@ class Membre {
 
     }
 #getters
+    function getNumUser()
+    {
+        return $this->numUser;
+    }
     function getName()
     {
        return $this->name;
@@ -64,10 +68,10 @@ class Membre {
 
     function __toString() {
 
-        return ' le membre a pour numuser '.$this->numUser.' </br>
-        a pour name '.$this->name.' </br>
-        a pour firstname '.$this->firstName.'</br>
-        a pour email '.$this->email.'</br>';
+        return ' le membre a pour numuser '.$this->numUser.' <br />
+        a pour name '.$this->name.' <br />
+        a pour firstname '.$this->firstName.'<br />
+        a pour email '.$this->email.'<br />';
 
     }
 

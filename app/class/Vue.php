@@ -3,6 +3,7 @@
 class Vue {
     private $membre;
     private $cookie;
+    private $fichier;
     private $corps;
     private $footer;
     function __construct($cook=null,$membre='') {
@@ -54,25 +55,28 @@ class Vue {
             </html>';
 
     }
-    function index($deconnexion=false){
+    function index($deconnexion=false,$resultFichier){
 
 
         $resultat='<div class="col-12 col-md-10 bg-light">
-                        <h1>Bienvenue '.$this->cookie.'</h1>
-                        '.$this->membre.'
-                        </br>
-                    </div>
+                        <div><h1>Bienvenue '.$this->cookie.'</h1>
+                        '.$this->membre.'</div><div>'.$this->fichier($resultFichier).'</div>';
                     
-                   '; 
-        if ($deconnexion) {
-            $div='
+                   
+        
+            $div='      <div>
                         <a href="index-5-1"> Deconnexion </a>    
-                   ';
-                }
+                        </div>
+                    
+                
+                ';
+                
         
                // echo ' </br> fichier courant'.$_SERVER['PHP_SELF'].'</br>';*/
                 //$resultat = 'page retournee </br>' ;
-                echo $this->corps.$resultat.$div.'</div>'.$this->footer;
+                echo $this->corps.$resultat;
+                if ($deconnexion){ echo $div;}
+                echo'</div></div>'.$this->footer;
 
 
 
@@ -208,16 +212,17 @@ class Vue {
     }
 
     function fichier($result) {
-        echo $this->corps;
-        echo'
+        //echo $this->corps;
+        /*$memory='
         <div class="col-12 col-md-10 bg-light">
-        ';
-        if (isset($result)) {
-            echo $result.'</div>
+        ';*/
+        /*if (isset($result)) {
+            return $memory.$result.'</div>
             </div>';
         }
         else {
-            echo'
+            return $memory.*/ return'
+                <div>
                 <form method="POST" action="index-4-1" enctype="multipart/form-data" >
                 <label for="upload_files"> Veuilliez choisir un fichier image a importer</label>
                 <input type="hidden" name="MAX_VALUE_FILES" value="100000">
@@ -225,9 +230,9 @@ class Vue {
                 <input type="submit" value="Envoyer" name="envoyer">
                 </form>
             </div>
-            </div>';
-        }
-        echo $this->footer;
+            ';
+        
+        //echo $this->footer;
     }
 
 

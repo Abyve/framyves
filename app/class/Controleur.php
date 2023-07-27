@@ -20,9 +20,12 @@ class Controleur {
             echo '$cookie est égale à : '.$cookie.'</br>';
             //$vue=new Vue($cookie);
             $m = new Modele('membres');     // on créé un objet membre
-            $membre=$m->getMembre($cookie);echo $membre;
+            $membre=$m->getMembre($cookie);
+            echo $membre;
+            $resultFichier=$this->fichier();
             $vue= new Vue($cookie,$membre);
-            $vue->index($cookie,$membre);
+            //$fichier=$vue->fichier($result);
+            $vue->index($cookie,$resultFichier);
             //ob_end_flush();
         }
     
@@ -130,44 +133,52 @@ class Controleur {
         ob_end_flush();
     }
     function fichier() {
-        $cookie=(isset($_COOKIE['email']) ? htmlspecialchars(trim($_COOKIE['email'])) : '');
-        $cookie='test@test';
-        echo '$cookie = '.$cookie.'</br>';
-        if (!file_exists('upload/')) {
+            $cookie=(isset($_COOKIE['email']) ? htmlspecialchars(trim($_COOKIE['email'])) : '');
+            //$cookie='test@test';
+            echo '$cookie = '.$cookie.'</br>';
+            if (!file_exists('upload/')) {
 
-            mkdir('upload');
+                mkdir('upload');
 
-        }
-        if (isset($_FILES['upload_files'])) {
-            
-            
-            $dossier='upload/'.$cookie.'/';
-            echo '$dossier = '.$dossier;
-            if (!file_exists($dossier)) {
+            }
+            if (isset($_FILES['upload_files'])) {
+                
+                
+                $dossier='upload/'.$cookie.'/';
+                echo '$dossier = '.$dossier;
+                if (!file_exists($dossier)) {
 
-                mkdir($dossier);
-    
-            }
-            $fichier=basename($_FILES['upload_files']['name']);
-            $max_file_size=100000;
-            if (filesize($_FILES['upload_files']['tmp_name'])>$max_file_size)
-            {
-                $result='Fichier trop volumineux';
-            }
-            elseif (move_uploaded_file($_FILES['upload_files']['tmp_name'],$dossier.$fichier))
-            {
-                $result='Upload réussi';
-                #include 'ajout  image en bdd'
-            }
-            else
-            {   
-                $result='Echec transfert fichier';   
-            }
-        }
+                    mkdir($dossier);
         
-        $v= new Vue($cookie);
-        $v->fichier($result);
+                }
+                $fichier=basename($_FILES['upload_files']['name']);
+                $max_file_size=100000;
+                if (filesize($_FILES['upload_files']['tmp_name'])>$max_file_size)
+                {
+                    $result='Fichier trop volumineux';
+                }
+                elseif (move_uploaded_file($_FILES['upload_files']['tmp_name'],$dossier.$fichier))
+                {
+                    $result='Upload réussi';
+                    
+                    $mo= new Modele('images');
+                    $membre=$mo->getMembre($cookie);
+                    $numUser=$membre->getNumUser();
+                    $i= new Image($numUser,$fichier,$dossier.$fichier);
+                    $mo->insert($i);
+                    $result='ajout image bdd ok ';
+                    #include 'ajout  image en bdd'
+                }
+                else
+                {   
+                    $result='Echec transfert fichier';   
+                }
             
+            return $result;
+            //$v= new Vue($cookie);
+            //$v->fichier($result);
+            }
+                
         
         
     }

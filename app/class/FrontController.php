@@ -46,7 +46,7 @@ class FrontController {
                             $match=$con->connexion();
                             return true;
                         case 4 :
-                            $match=$con->fichier();
+                            $match=$con->index();
                             return true;
                         case 5 :
                             $match=$con->deconnexion($deconnexion);
