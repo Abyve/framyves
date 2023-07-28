@@ -11,10 +11,10 @@ class Membre {
     private $email;
     private $pwd;
 
-    function __construct($n, $f, $e, $p)
+    function __construct($numU,$n, $f, $e, $p)
     {
         echo 'on rentre dans le construct de Membre </br>';
-        //$this->numUser=$numU;
+        $this->numUser=$numU;
         $this->name=$n;
         $this->firstName=$f;
         $this->email=$e;

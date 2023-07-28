@@ -10,7 +10,7 @@ class Controleur {
             $this->action=$act;
 
         }
-        function index() {
+        function index($action=1) {
             //echo '</br> on rentre dans la fonction index </br>';
 
             //include 'function/cookie.php' ;
@@ -22,10 +22,14 @@ class Controleur {
             $m = new Modele('membres');     // on créé un objet membre
             $membre=$m->getMembre($cookie);
             echo $membre;
+            $m2=new Modele('images',$membre->getNumUser());
+            var_dump($m2);echo ' $m2 dans controleur <br />';
+            $images=$m2->find();
+            var_dump($images); echo '$images dans controleur <br />';
             $resultFichier=$this->fichier();
             $vue= new Vue($cookie,$membre);
             //$fichier=$vue->fichier($result);
-            $vue->index($cookie,$resultFichier);
+            $vue->index($cookie,$resultFichier,$action,$images);
             //ob_end_flush();
         }
     

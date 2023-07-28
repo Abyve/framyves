@@ -55,9 +55,9 @@ class Vue {
             </html>';
 
     }
-    function index($deconnexion=false,$resultFichier){
+    function index($deconnexion=false,$resultFichier,$action=1,$images){
 
-
+        
         $resultat='<div class="col-12 col-md-10 bg-light">
                         <div><h1>Bienvenue '.$this->cookie.'</h1>
                         '.$this->membre.'</div><div>';
@@ -79,6 +79,29 @@ class Vue {
                 if (!empty($this->cookie)){
                     echo $this->corps.$resultat;
                     echo $afficheFichierForm;
+                    
+                    //echo '$action dans vue est égale à '.$action.'<br />';
+                    if ($action==2) {
+                        //var_dump($images);
+
+                        foreach ($images as $value) {
+                            //echo 'on rentre le foreach 1 <br />';
+                            //foreach($value as $val) {
+                                //echo 'on rentre dans le foreach 2 <br />';
+                                
+                                $adressImage=$value[0];
+                                //echo $adressImage;
+                                echo '<img src="'.$adressImage.'" width=60 height=60.>';   
+
+                            //}
+
+                            
+                            //echo 'adresse image est égale à ';var_dump($adressImage);
+                           //echo '<img src="'.$adressImage.'" width=60 height=60.>';
+                        }
+
+                        echo 'j affiche les images de la bdd';
+                    }
                 }
                 else {
                     echo $this->corps.'<div class="col-12 col-md-10 bg-light">
@@ -88,7 +111,7 @@ class Vue {
                     }
                 if ($deconnexion){ echo $div;}
                 echo'</div></div>'.$this->footer;
-
+            
 
 
 

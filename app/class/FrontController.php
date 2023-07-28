@@ -13,7 +13,7 @@ class FrontController {
             $this->page=$pge;
             //echo '$this->page = '.$this->page.'</br>';
             $this->action=$act;
-            $this->pgExist=['1-1','2-1','3-1','4-1','5-1'];//1-1 accueil, 2-1 connexion,
+            $this->pgExist=['1-1','1-2','2-1','3-1','4-1','5-1'];//1-1 accueil 1-2 affiche img, 2-1 connexion,
         
         }
 
@@ -37,7 +37,7 @@ class FrontController {
                     switch ($this->page) {
                         case 1 :
                             //$con= new Controleur($page,$action);
-                            $match=$con->index();
+                            $match=$con->index($this->action);
                             return true;
                         case 2 :
                             echo 'on rentre dans le case 2';
