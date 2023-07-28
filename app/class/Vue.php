@@ -55,7 +55,7 @@ class Vue {
             </html>';
 
     }
-    function index($deconnexion=false,$resultFichier,$action=1,$images){
+    function index($deconnexion=false,$resultFichier='',$action=1,$images=''){
 
         
         $resultat='<div class="col-12 col-md-10 bg-light">
@@ -67,6 +67,9 @@ class Vue {
         
             $div='      <div>
                         <a href="index-5-1"> Deconnexion </a>    
+                        </div>
+                        <div>
+                        <a href="index-1-2">Afficher toutes vos images </a>
                         </div>
                     
                 
@@ -100,7 +103,7 @@ class Vue {
                            //echo '<img src="'.$adressImage.'" width=60 height=60.>';
                         }
 
-                        echo 'j affiche les images de la bdd';
+                        //echo 'j affiche les images de la bdd';
                     }
                 }
                 else {

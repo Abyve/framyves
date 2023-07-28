@@ -19,18 +19,26 @@ class Controleur {
             //$cook=$this->connexion();
             echo '$cookie est égale à : '.$cookie.'</br>';
             //$vue=new Vue($cookie);
-            $m = new Modele('membres');     // on créé un objet membre
-            $membre=$m->getMembre($cookie);
-            echo $membre;
-            $m2=new Modele('images',$membre->getNumUser());
-            var_dump($m2);echo ' $m2 dans controleur <br />';
-            $images=$m2->find();
-            var_dump($images); echo '$images dans controleur <br />';
-            $resultFichier=$this->fichier();
-            $vue= new Vue($cookie,$membre);
-            //$fichier=$vue->fichier($result);
-            $vue->index($cookie,$resultFichier,$action,$images);
-            //ob_end_flush();
+            if (!empty($cookie)){
+                $m = new Modele('membres');     // on créé un objet membre
+                $membre=$m->getMembre($cookie);
+                echo $membre;
+                $m2=new Modele('images',$membre->getNumUser());
+                var_dump($m2);echo ' $m2 dans controleur <br />';
+                $images=$m2->find();
+                var_dump($images); echo '$images dans controleur <br />';
+            
+                $resultFichier=$this->fichier();
+                $vue= new Vue($cookie,$membre);
+                //$fichier=$vue->fichier($result);
+                $vue->index($cookie,$resultFichier,$action,$images);
+                //ob_end_flush();
+            }
+            else {
+
+                $vue= new Vue();
+                $vue->index();
+            }
         }
     
         function galerie() {
