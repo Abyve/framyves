@@ -40,6 +40,7 @@ class FrontController {
                             $match=$con->index();
                             return true;
                         case 2 :
+                            echo 'on rentre dans le case 2';
                             $match=$con->inscription();
                             return true;
                         case 3 :

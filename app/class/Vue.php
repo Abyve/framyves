@@ -60,7 +60,8 @@ class Vue {
 
         $resultat='<div class="col-12 col-md-10 bg-light">
                         <div><h1>Bienvenue '.$this->cookie.'</h1>
-                        '.$this->membre.'</div><div>'.$this->fichier($resultFichier).'</div>';
+                        '.$this->membre.'</div><div>';
+        $afficheFichierForm=$this->fichier($resultFichier).'</div>';
                     
                    
         
@@ -74,7 +75,17 @@ class Vue {
         
                // echo ' </br> fichier courant'.$_SERVER['PHP_SELF'].'</br>';*/
                 //$resultat = 'page retournee </br>' ;
-                echo $this->corps.$resultat;
+                
+                if (!empty($this->cookie)){
+                    echo $this->corps.$resultat;
+                    echo $afficheFichierForm;
+                }
+                else {
+                    echo $this->corps.'<div class="col-12 col-md-10 bg-light">
+                     <div>
+                     Bienvenue sur mon site projet du cnam de fin d\'études
+                    </div>';
+                    }
                 if ($deconnexion){ echo $div;}
                 echo'</div></div>'.$this->footer;
 
@@ -84,7 +95,7 @@ class Vue {
     }
 
     function inscription($err,$email,$nom,$prenom,$pwd_form) {
-
+        echo 'on rentre dans vue inscription </br>';
         $error=$err;
         echo $this->corps;
         echo'
@@ -216,12 +227,11 @@ class Vue {
         /*$memory='
         <div class="col-12 col-md-10 bg-light">
         ';*/
-        /*if (isset($result)) {
-            return $memory.$result.'</div>
-            </div>';
+        if (isset($result)) {
+            return $result;
         }
         else {
-            return $memory.*/ return'
+            return '
                 <div>
                 <form method="POST" action="index-4-1" enctype="multipart/form-data" >
                 <label for="upload_files"> Veuilliez choisir un fichier image a importer</label>
@@ -231,7 +241,7 @@ class Vue {
                 </form>
             </div>
             ';
-        
+        }
         //echo $this->footer;
     }
 

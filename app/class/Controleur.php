@@ -48,20 +48,25 @@ class Controleur {
         function inscription()
         {
             $error = FALSE;
+           
             $nom = (isset($_POST['nom'])) ? htmlspecialchars(trim($_POST['nom'])) : '';
             $prenom = (isset($_POST['prenom'])) ? htmlspecialchars(trim($_POST['prenom'])) : '';
             $email = (isset($_POST['email'])) ? htmlspecialchars(trim($_POST['email'])) : '';
             if (!(filter_var($email,FILTER_VALIDATE_EMAIL))) {$email='';};
             $pwd_form = (isset($_POST['pwd_form'])) ? htmlspecialchars(trim($_POST['pwd_form'])) : '';
             // Test si des valeures ont été soumisent
+           // echo ' la ça marche ';
             if (isset($_POST['submit'])) {
             // Validation des données
+           
                 if ( empty($nom) OR empty($prenom) OR empty($pwd_form) OR empty($email)) {
 
                 $error = TRUE;
                 }
                 else
+
                 {
+                    echo ' la ça marche ';
                     $membre=new Membre($email,$nom,$prenom,$pwd_form);
 
                     echo '$membre->name '.$membre->getName().'</br>';
@@ -73,6 +78,7 @@ class Controleur {
                 $m->insert($membre);
                 }
             }
+           
             $vue=new Vue($cook);
             echo $vue->inscription($error,$email,$nom,$prenom,$pwd_form);
 
