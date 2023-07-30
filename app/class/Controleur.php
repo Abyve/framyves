@@ -79,7 +79,7 @@ class Controleur {
 
                 {
                     echo ' la ça marche ';
-                    $membre=new Membre($email,$nom,$prenom,$pwd_form);
+                    $membre=new Membre($numU,$nom,$prenom,$email,$pwd_form);
 
                     echo '$membre->name '.$membre->getName().'</br>';
                     echo '$membre->firstName '.$membre->getFirstName().'</br>';
