@@ -13,7 +13,7 @@ class FrontController {
             $this->page=$pge;
             //echo '$this->page = '.$this->page.'</br>';
             $this->action=$act;
-            $this->pgExist=['1-1','1-2','2-1','3-1','4-1','5-1'];//1-1 accueil 1-2 affiche img, 2-1 connexion,
+            $this->pgExist=['1-1','1-2','2-1','3-1','4-1','5-1','6-'.$act];//1-1 accueil 1-2 affiche img, 2-1 connexion,
         
         }
 
@@ -51,6 +51,12 @@ class FrontController {
                             return true;
                         case 5 :
                             $match=$con->deconnexion($deconnexion);
+                            return true;
+
+                        case 6 :
+                            echo ' $action dans front controller est égale à '.$this->action;
+                            $match=$con->suppImage($this->action);
+                            return true;
                         
                     }
                     

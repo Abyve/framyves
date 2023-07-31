@@ -212,5 +212,15 @@ class Controleur {
 
 
     }
+
+    function suppImage($numImg) {
+        echo 'on rentre dans suppImage <br />';
+        $m=new Modele('images',$numImg);
+        $m->delete();
+        header("location:index-1-1");
+
+
+
+    }
 }
 

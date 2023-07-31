@@ -92,10 +92,12 @@ class Vue {
                             //foreach($value as $val) {
                                 //echo 'on rentre dans le foreach 2 <br />';
                                 
-                                $adressImage=$value[0];
-                                //echo $adressImage;
-                                echo '<img src="'.$adressImage.'" width=60 height=60.>';   
-
+                                $adressImg=$value['adressimg'];
+                                $numImg = $value['numimg'];
+                                //echo 'numimg est égale à '.$numImg.'<br />';
+                                echo '<img src="'.$adressImg.'" width=60 height=60.>';   
+                               // echo 'adresseImage est égale à '.$adressImg.'<br />';
+                                echo '<a href="index-6-'.$numImg.'"> Supp Image </a>';
                             //}
 
                             

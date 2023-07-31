@@ -110,7 +110,7 @@ class Modele {
         }
         elseif ($this->table == 'images') {
             try{
-                $query="SELECT adressimg FROM $this->table WHERE numuser='$this->cle' LIMIT 10";
+                $query="SELECT numimg,adressimg FROM $this->table WHERE numuser='$this->cle' LIMIT 10";
                 $r=$conn->query($query);
                 $result=$r->fetchAll();//(PDO::FETCH_ASSOC);
                 return $result;
