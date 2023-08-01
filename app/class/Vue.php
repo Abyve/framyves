@@ -86,24 +86,41 @@ class Vue {
                     //echo '$action dans vue est égale à '.$action.'<br />';
                     if ($action==2) {
                         //var_dump($images);
+                        
+                        echo '<div class="row justify-content-center">
+                                <div class="col-auto">
+                            <div class="table-responsive">
+                                        <table>';
 
                         foreach ($images as $value) {
                             //echo 'on rentre le foreach 1 <br />';
                             //foreach($value as $val) {
                                 //echo 'on rentre dans le foreach 2 <br />';
-                                
+                                //$i++;
                                 $adressImg=$value['adressimg'];
                                 $numImg = $value['numimg'];
                                 //echo 'numimg est égale à '.$numImg.'<br />';
-                                echo '<img src="'.$adressImg.'" width=60 height=60.>';   
+                                
+                                echo '<tr>
+                                        <td>';
+                                echo '<img src="'.$adressImg.'" width=160 height=160.>'; 
+                                echo '</td>
+                                      <td>' ; 
                                // echo 'adresseImage est égale à '.$adressImg.'<br />';
                                 echo '<a href="index-6-'.$numImg.'"> Supp Image </a>';
-                            //}
+                                //if ($i>=5) {echo'<br />';$i=0;};
+                                echo '</td></tr>';
+                                
 
                             
                             //echo 'adresse image est égale à ';var_dump($adressImage);
                            //echo '<img src="'.$adressImage.'" width=60 height=60.>';
                         }
+                        echo '</table>
+                            </div>
+                            </div>
+                        </div>';
+                                        
 
                         //echo 'j affiche les images de la bdd';
                     }
