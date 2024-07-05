@@ -6,48 +6,53 @@ class Vue {
     private $fichier;
     private $corps;
     private $footer;
+    private $rendu;
+    
     function __construct($cook=null,$membre='') {
        // echo 'on rentre dans la fonction construct de vue';
         $this->cookie=$cook;
         $this->membre=$membre;
-        $this->corps='<!DOCTYPE html>
-        <html lang="fr">
-            <head>
-                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">	
-                <meta charset="UTF-8" />
-                <title>Galerie image</title>
-                <link rel="stylesheet" type="text/css" href="style.css" />
-            </head>
-            <body>
-                <div class="container">
-                    <div class="row">
-                        <div class="col col-md-12 " id="banner">				
-                           <a href="index-1-1"> <img class="rounded img-fluid" src="./app/img/banner.png"  alt="Bannière"/></a>
+        $this->corps='
+        <!DOCTYPE html>
+            <html lang="fr">
+                <head>
+                    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">	
+                    <meta charset="UTF-8" />
+                    <title>Galerie image</title>
+                    <link rel="stylesheet" type="text/css" href="style.css" />
+                </head>
+                <body>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col col-md-12 " id="banner">				
+                                <a href="index-1-1"> <img class="rounded img-fluid" src="./app/img/banner.png"  alt="Bannière"/></a>
+                             </div>
                         </div>
-                    </div>
-                    <div class="row" >
-                        <div class="col col-md-2 bg-secondary">
-	                        <div class="mx-auto" >
-		                    <p class="mx-auto">
-			                <a href="index-2-1" >
-				            <img class="rounded img-fluid mt-2"  alt="bouton inscription" src="./app/img/button-inscription.png"/>
-			                </a>				
-			                <a href="index-3-1" >
-				            <img class="rounded img-fluid mt-2" alt="bouton connexion"  src="./app/img/button-connexion.png"/>
-			                </a>
-                       
-                        </div> 
-                    </div>';
-            $this->footer=  '<div class="row bg-danger">		
+                        <div class="row" >
+                            <div class="col col-md-2 bg-secondary">
+	                            <div class="mx-auto" >
+		                            <p class="mx-auto">
+			                            <a href="index-2-1" >
+				                            <img class="rounded img-fluid mt-2"  alt="bouton inscription" src="./app/img/button-inscription.png"/>
+			                            </a>				
+			                            <a href="index-3-1" >
+				                            <img class="rounded img-fluid mt-2" alt="bouton connexion"  src="./app/img/button-connexion.png"/>
+			                            </a>
+                                    </p>
+                                </div> 
+                            </div>
+                            ';
+            $this->footer=  '
+                        <div class="row bg-danger">		
                             <div class="col-8 md-2">			
-                            <p>Réalisé en 2023 par Yves Abiven au sein du CNAM 
-                            </p>				
+                                <p>Réalisé en 2023 par Yves Abiven au sein du CNAM 
+                                </p>				
                             </div>					
                             <div class="col-4">					
-                            <p class="md-2">				
-                            <img id="license" alt="license CCBYSA" src="./app/img/CCBYSA.png" />		
-                            </p>		
+                                <p class="md-2">				
+                                <img id="license" alt="license CCBYSA" src="./app/img/CCBYSA.png" />		
+                                </p>		
                             </div>
                         </div>
                     </div>        
@@ -58,19 +63,21 @@ class Vue {
     function index($deconnexion=false,$resultFichier='',$action=1,$images=''){
 
         
-        $resultat='<div class="col-12 col-md-10 bg-light">
-                        <div><h1>Bienvenue '.$this->cookie.'</h1>
-                        '.$this->membre.'</div><div>';
-        $afficheFichierForm=$this->fichier($resultFichier).'</div>';
+        $resultat='
+                            <div class="col-12 col-md-10 bg-light">
+                                <h1>Bienvenue '.$this->cookie.'</h1>
+                                '.$this->membre;
+        $afficheFichierForm=$this->fichier($resultFichier);
                     
                    
         
-            $div='      <div>
-                        <a href="index-5-1"> Deconnexion </a>    
-                        </div>
-                        <div>
-                        <a href="index-1-2">Afficher toutes vos images </a>
-                        </div>
+            $div='
+                                <p>
+                                <a href="index-5-1"> Deconnexion </a>    
+                                </p>
+                                <p>
+                                <a href="index-1-2">Afficher toutes vos images </a>
+                                </p>
                     
                 
                 ';
@@ -80,63 +87,72 @@ class Vue {
                 //$resultat = 'page retournee </br>' ;
                 
                 if (!empty($this->cookie)){
-                    echo $this->corps.$resultat;
-                    echo $afficheFichierForm;
+                    $this->rendu= $this->corps.$resultat.$afficheFichierForm.$div ;//</div> </div>';
                     
                     //echo '$action dans vue est égale à '.$action.'<br />';
                     if ($action==2) {
                         //var_dump($images);
                         
-                        echo '<div class="row justify-content-center">
-                                <div class="col-auto">
-                            <div class="table-responsive">
-                                        <table>';
-
+                        $tableImgDiv='
+                        <div class="row justify-content-center">
+                            <div class="col-auto">
+                                <div class="table-responsive">
+                                    <table>';
+                       ;
+                       $table='';
                         foreach ($images as $value) {
                             //echo 'on rentre le foreach 1 <br />';
                             //foreach($value as $val) {
                                 //echo 'on rentre dans le foreach 2 <br />';
                                 //$i++;
+                                
                                 $adressImg=$value['adressimg'];
                                 $numImg = $value['numimg'];
                                 //echo 'numimg est égale à '.$numImg.'<br />';
                                 
-                                echo '<tr>
-                                        <td>';
-                                echo '<img src="'.$adressImg.'" width=160 height=160.>'; 
-                                echo '</td>
-                                      <td>' ; 
-                               // echo 'adresseImage est égale à '.$adressImg.'<br />';
-                                echo '<a href="index-6-'.$numImg.'"> Supp Image </a>';
+                                $table=$table.'
+                                        <tr>
+                                            <td>    
+                                                <img src="'.$adressImg.'" width=160 height=160.>; 
+                                            </td>
+                                            <td>     ; 
+                                                <a href="index-6-'.$numImg.'"> Supp Image </a>
+                                            </td>
+                                        </tr>';
                                 //if ($i>=5) {echo'<br />';$i=0;};
-                                echo '</td></tr>';
+                                //echo '</td></tr>';
                                 
 
                             
                             //echo 'adresse image est égale à ';var_dump($adressImage);
                            //echo '<img src="'.$adressImage.'" width=60 height=60.>';
                         }
-                        echo '</table>
+                        $finTable='
+                                    </table>
+                                </div>
                             </div>
-                            </div>
-                        </div>';
-                                        
+                        </div>
+                       ';
+                        $this->rendu=$this->rendu.$tableImgDiv.$table.$finTable;
 
                         //echo 'j affiche les images de la bdd';
                     }
                 }
                 else {
-                    echo $this->corps.'<div class="col-12 col-md-10 bg-light">
-                     <div>
-                     Bienvenue sur mon site projet du cnam de fin d\'études
-                    </div>';
-                    }
-                if ($deconnexion){ echo $div;}
-                echo'</div></div>'.$this->footer;
+                    $this->rendu = $this->corps.
+                        '<div class="col-12 col-md-10 bg-light">
+                        <div>
+                            Bienvenue sur mon site projet du cnam de fin d\'études
+                         </div>
+                    </div>
+                </div>';
+                }
+                //if ($deconnexion){ echo $div;}
+                  //echo'</div></div>'.$this->footer;
             
 
-
-
+    //echo $this->rendu;
+    echo $this->rendu.$this->footer;
     }
 
     function inscription($err,$email,$nom,$prenom,$pwd_form) {
@@ -149,14 +165,14 @@ class Vue {
              if (isset($_POST['submit']) AND !$error){
                 echo'
                             <div>
-                            Toutes les données ont été soumises.
+                                Toutes les données ont été soumises.
                             </div>
                         </div>
                     </div>';
              }
             else {
-        echo'                   <div>
-                                    <form action="index-2-1" method="POST">
+        echo'               <div>
+                                <form action="index-2-1" method="POST">
                                     <div>
                                         <label for="email">Email : </label>
                                         <input type="text" id="email" name="email" value="'.$email.'"/>
@@ -284,7 +300,8 @@ class Vue {
                 <input type="file" name="upload_files" id="upload_files">
                 <input type="submit" value="Envoyer" name="envoyer">
                 </form>
-            </div>
+                </div>
+                
             ';
         }
         //echo $this->footer;

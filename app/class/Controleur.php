@@ -17,7 +17,7 @@ class Controleur {
             
             $cookie=(isset($_COOKIE['email'])) ? htmlspecialchars(trim($_COOKIE['email'])) : '';
             //$cook=$this->connexion();
-            echo '$cookie est égale à : '.$cookie.'</br>';
+            //echo '$cookie est égale à : '.$cookie.'</br>';
             //$vue=new Vue($cookie);
             if (!empty($cookie)){
                 $m = new Modele('membres');     // on créé un objet membre
