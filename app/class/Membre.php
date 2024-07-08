@@ -13,13 +13,13 @@ class Membre {
 
     function __construct($numU,$n, $f, $e, $p)
     {
-        echo 'on rentre dans le construct de Membre </br>';
+        //echo 'on rentre dans le construct de Membre </br>';
         $this->numUser=$numU;
         $this->name=$n;
         $this->firstName=$f;
         $this->email=$e;
         $this->pwd=$p;
-        echo'</br>creation nouveau membre ok </br>';
+        //echo'</br>creation nouveau membre ok </br>';
 
 
     }
@@ -68,11 +68,15 @@ class Membre {
 
     function __toString() {
 
-        return ' le membre a pour numuser '.$this->numUser.' <br />
-        a pour name '.$this->name.' <br />
-        a pour firstname '.$this->firstName.'<br />
-        a pour email '.$this->email.'<br />';
-
+        $retour='
+                                    <div>
+                                        <p>
+                                            le membre a pour numuser '.$this->numUser.' <br />
+                                            a pour name '.$this->name.' <br />
+                                            a pour firstname '.$this->firstName.'<br />
+                                            a pour email '.$this->email.'<br />
+                                        </p>';
+        return $retour;
     }
 
 

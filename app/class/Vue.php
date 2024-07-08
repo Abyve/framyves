@@ -41,8 +41,7 @@ class Vue {
 			                            </a>
                                     </p>
                                 </div> 
-                            </div>
-                            ';
+                            </div>';
             $this->footer=  '
                         <div class="row bg-danger">		
                             <div class="col-8 md-2">			
@@ -65,22 +64,22 @@ class Vue {
         
         $resultat='
                             <div class="col-12 col-md-10 bg-light">
-                                <h1>Bienvenue '.$this->cookie.'</h1>
-                                '.$this->membre;
+                                <div>
+                                    <h1>Bienvenue '.$this->cookie.'</h1>'.$this->membre;
+                            
         $afficheFichierForm=$this->fichier($resultFichier);
                     
                    
         
             $div='
-                                <p>
-                                <a href="index-5-1"> Deconnexion </a>    
-                                </p>
-                                <p>
-                                <a href="index-1-2">Afficher toutes vos images </a>
-                                </p>
-                    
-                
-                ';
+                                        <p>
+                                            <a href="index-5-1"> Deconnexion </a><br /> 
+                                            <a href="index-1-2">Afficher toutes vos images</a><br />
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>';
                 
         
                // echo ' </br> fichier courant'.$_SERVER['PHP_SELF'].'</br>';*/
@@ -94,10 +93,10 @@ class Vue {
                         //var_dump($images);
                         
                         $tableImgDiv='
-                        <div class="row justify-content-center">
-                            <div class="col-auto">
-                                <div class="table-responsive">
-                                    <table>';
+                        <div class="row">
+                            <div class="col-12 bg-light">
+                                <div>
+                                    <table class="table">';
                        ;
                        $table='';
                         foreach ($images as $value) {
@@ -316,17 +315,16 @@ class Vue {
             return $result;
         }
         else {
-            return '
-                <div>
-                <form method="POST" action="index-4-1" enctype="multipart/form-data" >
-                <label for="upload_files"> Veuilliez choisir un fichier image a importer</label>
-                <input type="hidden" name="MAX_VALUE_FILES" value="100000">
-                <input type="file" name="upload_files" id="upload_files">
-                <input type="submit" value="Envoyer" name="envoyer">
-                </form>
-                </div>
-                
-            ';
+            $string ='
+                                        <div>
+                                            <form method="POST" action="index-4-1" enctype="multipart/form-data" >
+                                                <label for="upload_files"> Veuilliez choisir un fichier image a importer</label>
+                                                <input type="hidden" name="MAX_VALUE_FILES" value="100000">
+                                                <input type="file" name="upload_files" id="upload_files">
+                                                <input type="submit" value="Envoyer" name="envoyer">
+                                            </form>
+                                        </div>';
+            return $string;
         }
         //echo $this->footer;
     }
