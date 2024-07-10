@@ -26,10 +26,10 @@ class FrontController {
 
 
             foreach ($this->pgExist as $value) {
-                echo 'on entre dans le foreach de match </br>';
-                echo '$value = '.$value.'</br>';
-                var_dump($value);
-                echo'</br> $this->page est égale à '.$this->page.'</br>';
+                //echo 'on entre dans le foreach de match </br>';
+                //echo '$value = '.$value.'</br>';
+                //var_dump($value);
+                //echo'</br> $this->page est égale à '.$this->page.'</br>';
                 
                 if (($value == $this->page.'-'.$this->action) AND !isset($con)){
                     //echo 'on rentre dans le if du foreach de match';
