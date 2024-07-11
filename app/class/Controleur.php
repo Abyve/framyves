@@ -22,11 +22,11 @@ class Controleur {
             if (!empty($cookie)){
                 $m = new Modele('membres');     // on créé un objet membre
                 $membre=$m->getMembre($cookie);
-                echo $membre;
+                var_dump($membre);
                 $m2=new Modele('images',$membre->getNumUser());
-                var_dump($m2);echo ' $m2 dans controleur <br />';
+                var_dump($m2);echo ' <br /> $m2 dans controleur <br />';
                 $images=$m2->find();
-                var_dump($images); echo '$images dans controleur <br />';
+                var_dump($images); echo '<br /> $images dans controleur <br />';
             
                 $resultFichier=$this->fichier();
                 $vue= new Vue($cookie,$membre);
