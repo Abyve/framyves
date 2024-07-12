@@ -161,9 +161,17 @@ class Controleur {
             }
             if (isset($_FILES['upload_files'])) {
                 
-                
+                $finfo=finfo_open(FILEINFO_MIME_TYPE);
+                $mimeType=finfo_file($finfo, $_FILES['upload_files']['tmp_name']);
+                var_dump($mimeType);
+                echo ' $mimeType ';
+                $verifMimeType==true;
+
+                if (($mimeType=='image/png') OR ($mimeType=='image/jpeg')){$verifMimeType=true;}
+                echo '$verifMimeType ='.$verifMimeType.'<br />';
                 $dossier='upload/'.$cookie.'/';
                 echo '$dossier = '.$dossier;
+                
                 if (!file_exists($dossier)) {
 
                     mkdir($dossier);
@@ -174,8 +182,10 @@ class Controleur {
                 if (filesize($_FILES['upload_files']['tmp_name'])>$max_file_size)
                 {
                     $result='Fichier trop volumineux';
+                
+                ;
                 }
-                elseif (move_uploaded_file($_FILES['upload_files']['tmp_name'],$dossier.$fichier))
+                elseif (($verifMimeType) AND (move_uploaded_file($_FILES['upload_files']['tmp_name'],$dossier.rand(1,999).$fichier)))
                 {
                     $result='Upload réussi';
                     
