@@ -91,10 +91,12 @@ class Modele {
         $conn=$this->connectBDD();
         if ($this->table == 'membres'){
             try{
-                $query="SELECT * FROM $this->table WHERE numuser='$this->cle'";
+                $query="SELECT * FROM $this->table WHERE :numuser";
                 //echo $query;
-
-                $r=$conn->query($query);
+                $r=$conn->prepare($query);
+                $r-bindValue(':numuser',$this->cle);
+                $r->execute();
+                //$r=$conn->query($query);
                 $result=$r->fetch();
                 //echo 'vardump $result';
                 //var_dump($result);
@@ -110,9 +112,12 @@ class Modele {
         }
         elseif ($this->table == 'images') {
             try{
-                $query="SELECT * FROM $this->table WHERE numuser=$this->cle LIMIT 10";
+                $query="SELECT * FROM $this->table WHERE :numuser LIMIT 10";
+                $r=$conn->prepare($query);
+                $r->bindValue(':numuser',$this->cle);
+                $r->execute();
                 echo '$query ='.$query;
-                $r=$conn->query($query);
+                //$r=$conn->query($query);
                 $result=$r->fetchAll();//(PDO::FETCH_ASSOC);
                 var_dump($result); echo '$result dans find image';
                 return $result;
@@ -198,6 +203,10 @@ class Modele {
         elseif ($this->table=='images') {
             try{
                 $query="DELETE FROM $this->table WHERE numimg = $this->cle";
+                /*$r=$conn->prepare($query);
+                $r->bindValue(':numimg',$this->cle);
+                $r->execute();
+                */
                 $conn->exec($query);
             }
             catch (PDOException $e) {
