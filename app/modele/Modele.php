@@ -110,9 +110,11 @@ class Modele {
         }
         elseif ($this->table == 'images') {
             try{
-                $query="SELECT * FROM $this->table WHERE numuser='$this->cle' LIMIT 10";
+                $query="SELECT * FROM $this->table WHERE numuser=$this->cle LIMIT 10";
+                echo '$query ='.$query;
                 $r=$conn->query($query);
                 $result=$r->fetchAll();//(PDO::FETCH_ASSOC);
+                var_dump($result); echo '$result dans find image';
                 return $result;
                 
             }   
@@ -195,7 +197,7 @@ class Modele {
         }
         elseif ($this->table=='images') {
             try{
-                $query="DELETE FROM $this->table WHERE numimg= $this->cle";
+                $query="DELETE FROM $this->table WHERE numimg = $this->cle";
                 $conn->exec($query);
             }
             catch (PDOException $e) {

@@ -160,7 +160,7 @@ class Controleur {
 
             }
             if (isset($_FILES['upload_files'])) {
-                
+                $jeton=rand(1,999);
                 $finfo=finfo_open(FILEINFO_MIME_TYPE);
                 $mimeType=finfo_file($finfo, $_FILES['upload_files']['tmp_name']);
                 var_dump($mimeType);
@@ -185,14 +185,14 @@ class Controleur {
                 
                 ;
                 }
-                elseif (($verifMimeType) AND (move_uploaded_file($_FILES['upload_files']['tmp_name'],$dossier.rand(1,999).$fichier)))
+                elseif (($verifMimeType) AND (move_uploaded_file($_FILES['upload_files']['tmp_name'],$dossier.$jeton.$fichier)))
                 {
                     $result='Upload réussi';
                     
                     $mo= new Modele('images');
                     $membre=$mo->getMembre($cookie);
                     $numUser=$membre->getNumUser();
-                    $i= new Image($numUser,$fichier,$dossier.$fichier);
+                    $i= new Image($numUser,$fichier,$dossier.$jeton.$fichier);
                     $mo->insert($i);
                     $result='ajout image bdd ok ';
                     #include 'ajout  image en bdd'
