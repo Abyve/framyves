@@ -168,16 +168,15 @@ class Vue {
         $error=$err;
         echo $this->corps;
         $string ='
-                        <div class="col-12 col-md-10 bg-light">
-            ';
+                            <div class="col-12 col-md-10 bg-light">';
         echo $string;
              if (isset($_POST['submit']) AND !$error){
                 $string='
-                            <div>
-                                Toutes les données ont été soumises.
+                                <div>
+                                    Toutes les données ont été soumises.
+                                </div>
                             </div>
-                        </div>
-                    </div>';
+                        </div>';
                 echo $string;    
              }
             else {
