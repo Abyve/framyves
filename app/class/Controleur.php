@@ -165,7 +165,7 @@ class Controleur {
                 $mimeType=finfo_file($finfo, $_FILES['upload_files']['tmp_name']);
                 var_dump($mimeType);
                 echo ' $mimeType ';
-                $verifMimeType==true;
+                $verifMimeType=true;
 
                 if (($mimeType=='image/png') OR ($mimeType=='image/jpeg')){$verifMimeType=true;}
                 echo '$verifMimeType ='.$verifMimeType.'<br />';
