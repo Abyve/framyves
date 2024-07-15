@@ -159,7 +159,7 @@ class Vue {
                   //echo'</div></div>'.$this->footer;
             
 
-    //echo $this->rendu;
+    echo $this->rendu;
     echo $this->rendu.$this->footer;
     //echo 'apres point d arret';
     //            phpinfo();
