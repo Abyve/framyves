@@ -206,6 +206,19 @@ class Modele {
                 /*$r=$conn->prepare($query);
                 $r->bindValue(':numimg',$this->cle);
                 $r->execute();
+                /*essai malheureux de supprimer le fichier sur le serveur 
+                $query2="SELECT numuser FROM images WHERE numimg= $this->cle";/*$r=$conn->prepare($query);
+                $r2=$conn->exec($query2);
+                //$resultat2=$r2->fetch();
+                $query3="SELECT name FROM membres WHERE numuser=$resultat2";
+                $r3=$conn->exec($query3);      
+                //$resultat3=$r3->fetch();
+                echo '$r2';
+                var_dump ($r2); 
+                echo '$r3';
+                var_dump($r3);
+                
+
                 */
                 $conn->exec($query);
             }
