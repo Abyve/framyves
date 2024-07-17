@@ -12,6 +12,7 @@ class Controleur {
         }
         function nettoieDossierImage($images)
         {
+            
             $cookie=(isset($_COOKIE['email'])) ? htmlspecialchars(trim($_COOKIE['email'])) : '';
             $scandir=scandir('./upload/'.$cookie);
             $marqueur=false;
