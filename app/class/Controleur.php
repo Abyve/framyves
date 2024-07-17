@@ -10,6 +10,46 @@ class Controleur {
             $this->action=$act;
 
         }
+        function nettoieDossierImage($images)
+        {
+            $cookie=(isset($_COOKIE['email'])) ? htmlspecialchars(trim($_COOKIE['email'])) : '';
+            $scandir=scandir('./upload/'.$cookie);
+            $marqueur=false;
+            foreach($scandir as $fichier)
+                {   //$parcoursDossier=false;
+                    $marqueur=false;
+                    echo '< br /> '.$fichier.' =fichier </br>';
+                    foreach ($images as $key => $img) {
+                        echo ' avant if $fichier =='.$fichier.'<br />';
+                        echo ' avant if $images =='.$images[$key]['nameimg'];
+                        if ($fichier==$images[$key]['nameimg'])
+                        {
+                            echo '$fichier =='.$fichier.'<br />';
+                            echo '$images =='.$images[$key]['nameimg'].' <br />';
+                            $marqueur=true;
+                            
+                            echo '$fichier a conserver '.$images[$key]['nameimg'].'<br />';
+                            break;
+                        }
+                    }
+                    if (!$marqueur)
+                    {
+                            
+                            if ((is_file($fichier)) && (unlink($fichier)))
+                            {
+
+                                echo '<br /> j efface le fichier '.$fichier.'<br />';
+                            }
+                        
+                    } 
+                    //$parcoursDossier=true;
+                    
+                   
+                    
+                }
+
+        }
+
         function index($action=1) {
             //echo '</br> on rentre dans la fonction index </br>';
 
@@ -25,7 +65,9 @@ class Controleur {
                 var_dump($membre);
                 $m2=new Modele('images',$membre->getNumUser());
                 var_dump($m2);echo ' <br /> $m2 dans controleur <br />';
-                $images=$m2->find();
+              
+                $images=$m2->find();  
+                $this->nettoieDossierImage($images);
                 var_dump($images); echo '<br /> $images dans controleur <br />';
             
                 $resultFichier=$this->fichier();
