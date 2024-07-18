@@ -14,35 +14,44 @@ class Controleur {
         {
             
             $cookie=(isset($_COOKIE['email'])) ? htmlspecialchars(trim($_COOKIE['email'])) : '';
-            $scandir=scandir('./upload/'.$cookie);
-            $marqueur=false;
+            $path='./upload/'.$cookie;
+            $scandir=scandir($path);
+            $marqueurBdd=false;
             foreach($scandir as $fichier)
                 {   //$parcoursDossier=false;
-                    $marqueur=false;
-                    echo '< br /> '.$fichier.' =fichier </br>';
-                    foreach ($images as $key => $img) {
-                        echo ' avant if $fichier =='.$fichier.'<br />';
-                        echo ' avant if $images =='.$images[$key]['nameimg'];
-                        if ($fichier==$images[$key]['nameimg'])
-                        {
-                            echo '$fichier =='.$fichier.'<br />';
-                            echo '$images =='.$images[$key]['nameimg'].' <br />';
-                            $marqueur=true;
-                            
-                            echo '$fichier a conserver '.$images[$key]['nameimg'].'<br />';
-                            break;
-                        }
-                    }
-                    if (!$marqueur)
-                    {
-                            
-                            if ((is_file($fichier)) && (unlink($fichier)))
+                        $files='';
+                        $marqueur=false;
+                        echo '< br /> '.$fichier.' =fichier </br>';
+                        foreach ($images as $key => $img) {
+                            echo ' avant if $fichier =='.$fichier.'<br />';
+                            echo ' avant if $images =='.$images[$key]['nameimg'];
+                            if ($fichier===$images[$key]['nameimg'])
                             {
+                                echo '$fichier =='.$fichier.'<br />';
+                                echo '$images =='.$images[$key]['nameimg'].' <br />';
+                                $marqueurBdd=true;
+                                $files=$images[$key]['nameimg'];
+                            
+                                echo '$fichier a conserver '.$images[$key]['nameimg'].'<br />';
+                            
+                            }
+                            elseif ((($key===count($images)-1) AND ($marqueurBdd==false)) AND (is_file($path.'/'.$files)))
+                            {
+                                echo '<br /> j efface le fichier '.$fichier.'<br />';
+                            
+                            }
+
+                        }
+                        if (is_file($path.'/'.$files) AND (!$marqueurBdd))
+                        {
+            
+                            
+                            
 
                                 echo '<br /> j efface le fichier '.$fichier.'<br />';
-                            }
-                        
-                    } 
+                            
+                        }
+                    
                     //$parcoursDossier=true;
                     
                    
