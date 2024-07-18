@@ -15,48 +15,32 @@ class Controleur {
             
             $cookie=(isset($_COOKIE['email'])) ? htmlspecialchars(trim($_COOKIE['email'])) : '';
             $path='./upload/'.$cookie;
-            $scandir=scandir($path);
-            $marqueurBdd=false;
-            foreach($scandir as $fichier)
-                {   //$parcoursDossier=false;
-                        $files='';
-                        $marqueur=false;
-                        echo '< br /> '.$fichier.' =fichier </br>';
-                        foreach ($images as $key => $img) {
-                            echo ' avant if $fichier =='.$fichier.'<br />';
-                            echo ' avant if $images =='.$images[$key]['nameimg'];
-                            if ($fichier===$images[$key]['nameimg'])
-                            {
-                                echo '$fichier =='.$fichier.'<br />';
-                                echo '$images =='.$images[$key]['nameimg'].' <br />';
-                                $marqueurBdd=true;
-                                $files=$images[$key]['nameimg'];
-                            
-                                echo '$fichier a conserver '.$images[$key]['nameimg'].'<br />';
-                            
-                            }
-                            elseif ((($key===count($images)-1) AND ($marqueurBdd==false)) AND (is_file($path.'/'.$files)))
-                            {
-                                echo '<br /> j efface le fichier '.$fichier.'<br />';
-                            
-                            }
-
-                        }
-                        if (is_file($path.'/'.$files) AND (!$marqueurBdd))
-                        {
             
-                            
-                            
-
-                                echo '<br /> j efface le fichier '.$fichier.'<br />';
-                            
-                        }
-                    
-                    //$parcoursDossier=true;
-                    
-                   
-                    
+            $scandir=scandir($path);
+            $filesInBdd=[];
+            foreach ($images as $key => $img) {
+                if (($images[$key]['nameimg']!=='.') and ($images[$key]['nameimg']!='..'))
+                {
+                $filesInBdd[]=$images[$key]['nameimg'];
                 }
+            }
+            if (isset($filesInBdd) && isset($scandir)) {
+                $result=array_diff($scandir,$filesInBdd);
+                }
+            echo '<br />';
+            var_dump($result);echo '<br /> $result <br />';
+            var_dump($filesInBdd);echo '<br /> $filesInBdd <br />';
+            var_dump($scandir);echo '<br /> $scandir <br />';
+            foreach ($result as $value)
+            {
+                $path2=$path.'/'.$value;
+                if (is_file($path2))
+                {
+                echo 'on efface le fichier : <br />'.$path2.'<br />';
+                unlink($path2);
+                }
+            }
+                               
 
         }
 
@@ -212,7 +196,7 @@ class Controleur {
 
             }
             if (isset($_FILES['upload_files'])) {
-                $jeton=rand(1,999);
+                $jeton='' ;//rand(1,999);
                 $finfo=finfo_open(FILEINFO_MIME_TYPE);
                 $mimeType=finfo_file($finfo, $_FILES['upload_files']['tmp_name']);
                 var_dump($mimeType);
