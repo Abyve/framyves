@@ -12,32 +12,38 @@ class Controleur {
         }
         function nettoieDossierImage($images)
         {
-            
+            echo 'var_dump($images) dans nettoieDossierImage ';
+            var_dump($images);
             $cookie=(isset($_COOKIE['email'])) ? htmlspecialchars(trim($_COOKIE['email'])) : '';
             $path='./upload/'.$cookie;
             
             $scandir=scandir($path);
             $filesInBdd=[];
             foreach ($images as $key => $img) {
-                if (($images[$key]['nameimg']!=='.') and ($images[$key]['nameimg']!='..'))
-                {
+                
+                
                 $filesInBdd[]=$images[$key]['nameimg'];
-                }
+                
             }
             if (isset($filesInBdd) && isset($scandir)) {
                 $result=array_diff($scandir,$filesInBdd);
                 }
+             echo '<br /> $scandir <br />';
+            var_dump($scandir);
+            
+            echo '<br /> $filesInBdd <br />';
+            var_dump($filesInBdd);
+           
             echo '<br />';
-            var_dump($result);echo '<br /> $result <br />';
-            var_dump($filesInBdd);echo '<br /> $filesInBdd <br />';
-            var_dump($scandir);echo '<br /> $scandir <br />';
+            echo '<br /> $result <br />';
+            var_dump($result);
             foreach ($result as $value)
             {
                 $path2=$path.'/'.$value;
                 if (is_file($path2))
                 {
                 echo 'on efface le fichier : <br />'.$path2.'<br />';
-                unlink($path2);
+                $info=unlink($path2);
                 }
             }
                                
