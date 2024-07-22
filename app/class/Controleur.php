@@ -202,11 +202,12 @@ class Controleur {
 
             }
             if (isset($_FILES['upload_files'])) {
-                $jeton='' ;//rand(1,999);
+                $jeton=rand(1,999);
                 $finfo=finfo_open(FILEINFO_MIME_TYPE);
                 $mimeType=finfo_file($finfo, $_FILES['upload_files']['tmp_name']);
-                var_dump($mimeType);
                 echo ' $mimeType ';
+                var_dump($mimeType);
+               
                 $verifMimeType=true;
 
                 if (($mimeType=='image/png') OR ($mimeType=='image/jpeg')){$verifMimeType=true;}
@@ -219,7 +220,7 @@ class Controleur {
                     mkdir($dossier);
         
                 }
-                $fichier=basename($_FILES['upload_files']['name']);
+                $fichier=$jeton.basename($_FILES['upload_files']['name']);
                 $max_file_size=100000;
                 if (filesize($_FILES['upload_files']['tmp_name'])>$max_file_size)
                 {
@@ -227,16 +228,21 @@ class Controleur {
                 
                 ;
                 }
-                elseif (($verifMimeType) AND (move_uploaded_file($_FILES['upload_files']['tmp_name'],$dossier.$jeton.$fichier)))
+                elseif (($verifMimeType) AND (move_uploaded_file($_FILES['upload_files']['tmp_name'],$dossier.$fichier)))
                 {
                     $result='Upload réussi';
                     
                     $mo= new Modele('images');
                     $membre=$mo->getMembre($cookie);
                     $numUser=$membre->getNumUser();
-                    $i= new Image($numUser,$fichier,$dossier.$jeton.$fichier);
+                    $adressImg=$dossier.$fichier;
+
+                    echo 'adressImg dans fichier : '.$adressImg.'<br />';
+                    $i= new Image($numUser, $fichier,$adressImg);
                     $mo->insert($i);
                     $result='ajout image bdd ok ';
+                    
+                
                     #include 'ajout  image en bdd'
                 }
                 else
