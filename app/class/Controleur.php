@@ -202,7 +202,7 @@ class Controleur {
 
             }
             if (isset($_FILES['upload_files'])) {
-                $jeton=rand(1,999);
+                $jeton=rand(1,9999);
                 $finfo=finfo_open(FILEINFO_MIME_TYPE);
                 $mimeType=finfo_file($finfo, $_FILES['upload_files']['tmp_name']);
                 echo ' $mimeType ';
@@ -220,7 +220,8 @@ class Controleur {
                     mkdir($dossier);
         
                 }
-                $fichier=$jeton.basename($_FILES['upload_files']['name']);
+                //$fichier=$jeton.basename($_FILES['upload_files']['name']);
+                $fichier = pathinfo($_FILES['upload_files']['name'], PATHINFO_FILENAME).'-'.$jeton.'.'.pathinfo($_FILES['upload_files']['name'], PATHINFO_EXTENSION);
                 $max_file_size=100000;
                 if (filesize($_FILES['upload_files']['tmp_name'])>$max_file_size)
                 {
