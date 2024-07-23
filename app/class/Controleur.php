@@ -12,64 +12,57 @@ class Controleur {
         }
         function nettoieDossierImage($images)
         {
-            echo 'var_dump($images) dans nettoieDossierImage ';
-            var_dump($images);
+            //echo 'var_dump($images) dans nettoieDossierImage ';
+            //var_dump($images);
             $cookie=(isset($_COOKIE['email'])) ? htmlspecialchars(trim($_COOKIE['email'])) : '';
             $path='./upload/'.$cookie;
-            
-            $scandir=scandir($path);
-            $filesInBdd=[];
-            foreach ($images as $key => $img) {
-                
-                
-                $filesInBdd[]=$images[$key]['nameimg'];
-                
-            }
-            if (isset($filesInBdd) && isset($scandir)) {
-                $result=array_diff($scandir,$filesInBdd);
-                }
-             echo '<br /> $scandir <br />';
-            var_dump($scandir);
-            
-            echo '<br /> $filesInBdd <br />';
-            var_dump($filesInBdd);
-           
-            echo '<br />';
-            echo '<br /> $result <br />';
-            var_dump($result);
-            foreach ($result as $value)
+            if (is_file($path)) 
             {
-                $path2=$path.'/'.$value;
-                if (is_file($path2))
-                {
-                echo 'on efface le fichier : <br />'.$path2.'<br />';
-                $info=unlink($path2);
+                $scandir=scandir($path);
+                $filesInBdd=[];
+                foreach ($images as $key => $img) {
+                    
+                    
+                    $filesInBdd[]=$images[$key]['nameimg'];
+                    
                 }
-            }
-                               
+                if (isset($filesInBdd) && isset($scandir)) {
+                    $result=array_diff($scandir,$filesInBdd);
+                    }
+                //echo '<br /> $scandir <br />';
+                //var_dump($scandir);
+                
+                //echo '<br /> $filesInBdd <br />';
+                //var_dump($filesInBdd);
+            
+                //echo '<br />';
+                //echo '<br /> $result <br />';
+                //var_dump($result);
+                foreach ($result as $value)
+                {
+                    $path2=$path.'/'.$value;
+                    if (is_file($path2))
+                    {
+                    //echo 'on efface le fichier : <br />'.$path2.'<br />';
+                    $info=unlink($path2);
+                    }
+                }
+            }                   
 
         }
 
         function index($action=1) {
-            //echo '</br> on rentre dans la fonction index </br>';
-
-            //include 'function/cookie.php' ;
             
             $cookie=(isset($_COOKIE['email'])) ? htmlspecialchars(trim($_COOKIE['email'])) : '';
-            //$cook=$this->connexion();
-            //echo '$cookie est égale à : '.$cookie.'</br>';
-            //$vue=new Vue($cookie);
             if (!empty($cookie)){
                 $m = new Modele('membres');     // on créé un objet membre
                 $membre=$m->getMembre($cookie);
-                var_dump($membre);
+                //var_dump($membre);
                 $m2=new Modele('images',$membre->getNumUser());
-                var_dump($m2);echo ' <br /> $m2 dans controleur <br />';
-              
+                //var_dump($m2);echo ' <br /> $m2 dans controleur <br />';
                 $images=$m2->find();  
                 $this->nettoieDossierImage($images);
-                var_dump($images); echo '<br /> $images dans controleur <br />';
-            
+                //var_dump($images); echo '<br /> $images dans controleur <br />';
                 $resultFichier=$this->fichier();
                 $vue= new Vue($cookie,$membre);
                 //$fichier=$vue->fichier($result);
@@ -83,119 +76,64 @@ class Controleur {
             }
         }
     
-        function galerie() {
-            
-            $mod=new Modele('images',$cle);
-            $imgs=$mod->find();
-            include 'vueGalerie.php';
-
-
-
-        }
-        function connection() {
-            
-            $cookie=$_COOKIE['email'];
-            include 'vueConnexion.php';
-
-
-        }
+     
         function inscription()
         {
             $error = FALSE;
-           
             $nom = (isset($_POST['nom'])) ? htmlspecialchars(trim($_POST['nom'])) : '';
             $prenom = (isset($_POST['prenom'])) ? htmlspecialchars(trim($_POST['prenom'])) : '';
             $email = (isset($_POST['email'])) ? htmlspecialchars(trim($_POST['email'])) : '';
             if (!(filter_var($email,FILTER_VALIDATE_EMAIL))) {$email='';};
             $pwd_form = (isset($_POST['pwd_form'])) ? htmlspecialchars(trim($_POST['pwd_form'])) : '';
-            // Test si des valeures ont été soumisent
-           // echo ' la ça marche ';
             if (isset($_POST['submit'])) {
-            // Validation des données
-           
                 if ( empty($nom) OR empty($prenom) OR empty($pwd_form) OR empty($email)) {
-
-                $error = TRUE;
+                    $error = TRUE;
                 }
                 else
-
                 {
-                    echo ' la ça marche ';
-                    $membre=new Membre($numU,$nom,$prenom,$email,$pwd_form);
-
-                    echo '$membre->name '.$membre->getName().'</br>';
-                    echo '$membre->firstName '.$membre->getFirstName().'</br>';
-                    echo '$membre->email '.$membre->getEmail().'</br>';
-                    echo '$membre->pwd '.$membre->getPwd().'</br>';
-                    echo '$error = '.var_dump($error).'</br>';
-                $m=new Modele('membres');
-                $m->insert($membre);
+                        $membre=new Membre($numU,$nom,$prenom,$email,$pwd_form);
+                        echo '$membre->name '.$membre->getName().'</br>';
+                        echo '$membre->firstName '.$membre->getFirstName().'</br>';
+                        echo '$membre->email '.$membre->getEmail().'</br>';
+                        echo '$membre->pwd '.$membre->getPwd().'</br>';
+                        echo '$error = '.var_dump($error).'</br>';
+                        $m=new Modele('membres');
+                        $m->insert($membre);
                 }
             }
-           
-            $vue=new Vue($cook);
+            $vue=new Vue();
             echo $vue->inscription($error,$email,$nom,$prenom,$pwd_form);
-
         }
 
         function connexion() {
        
             $cookie= (isset($_COOKIE['email']) ? htmlspecialchars(trim($_COOKIE['email'])) : '');
-            //echo '$cookie au debut du script ='.$cookie.'</br>';
             $error=false;
             $email= (isset($_POST['email']) ? htmlspecialchars(trim($_POST['email'])) : '');
             if (!(filter_var($email,FILTER_VALIDATE_EMAIL))) {$email='';};
             $pwd_connexion= (isset($_POST['pwd_connexion']) ? htmlspecialchars(trim($_POST['pwd_connexion'])) : '');
-            //echo 'email soumis au debut du script ='.$email.'</br>';
-            
             if (empty($cookie)) {
-                echo ' on rentre dans le if de empty cookie </br>';
                 if (isset($_POST['submit'])) {
                 // Validation des données
                     if (empty($pwd_connexion) OR empty($email)) {
                         $error = TRUE;
-                //$m= new Modele('membres');
-                        /*$v= new Vue();
-                        $v->connexion($error,$email,$pwd_connexion);
-                        */
                     }
-                    
-                    echo 'on est dans le if de isset $_post sans $ error </br>';
                     $m=new Modele('membres');
                     $m->pas_de_cookie($error,$email,$pwd_connexion);
-                    echo '$cookie est égale à '.$cookie.'</br>';
-                    /*$vu = new Vue($cookie) ;
-                    $vu->connexion();*/ 
+                    //echo '$cookie est égale à '.$cookie.'</br>';
                 }
             }
             else    {
-               
-                
                 header('location:index-1-1');
-                }
-            
-            
-             
-            //$v= new Vue($cookie);
-            //$v->accueil();
-            
+            }
             $v= new Vue();
             $v->connexion($error,$email,$pwd_connexion);
-                
-            //$v=new Vue($cookie);
-            //$v->connexion($error,$email,$pwd_connexion);
-                
-        
-        //$error=pas_de_cookie($error,$email,$pwd_connexion);
-        //echo '$error après traitement function pas_de_cookie = '.$error.'</br>';
-        //echo 'après traitement $cookie = '.$cookie.'</br>';
-        //echo 'après traitement $email = '.$email.'</br>';
         ob_end_flush();
     }
     function fichier() {
             $cookie=(isset($_COOKIE['email']) ? htmlspecialchars(trim($_COOKIE['email'])) : '');
             //$cookie='test@test';
-            echo '$cookie = '.$cookie.'</br>';
+            //echo '$cookie = '.$cookie.'</br>';
             if (!file_exists('upload/')) {
 
                 mkdir('upload');

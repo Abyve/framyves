@@ -107,14 +107,14 @@ class Vue {
                                 
                                 
                                 $adressImg[]=$value['adressimg'];
-                                var_dump($adressImg); echo '</br> vardump de $adressImg<br />';
+                                //var_dump($adressImg); echo '</br> vardump de $adressImg<br />';
                                 $numImg[] = $value['numimg'];
-                                var_dump($numImg);
-                                echo 'var dump de numImmg <br />';
+                                //var_dump($numImg);
+                                //echo 'var dump de numImmg <br />';
                             }
                                 
                         for ($i=0;$i<=count($adressImg)-1;$i++)
-                        {   echo $i.'$i <br />';
+                        {   //echo $i.'$i <br />';
                             if($i%2==0){$table=$table.'
                                         <tr>';}
                                     $table=$table.'
@@ -313,8 +313,9 @@ class Vue {
         ';
                 echo $string7;
     }
-            echo '$_COOKIE est égale à '.$_COOKIE['email'].$this->footer;
-    }
+            //echo '$_COOKIE est égale à '.$_COOKIE['email'].$this->footer;
+            echo $this->footer;
+        }
 
     function fichier($result) {
         //echo $this->corps;

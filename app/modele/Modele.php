@@ -10,20 +10,20 @@ class Modele {
 
     function __construct($tble,$cl=null)
     {
-        echo 'on entre dans le construct de la class Modele';
+        //echo 'on entre dans le construct de la class Modele';
         $this->table=$tble;
         $this->cle=$cl;
-        echo '$this->table = '.$this->table.'</br>';
-        echo '$this->cle = '.$this->cle.'</br>';
+        //echo '$this->table = '.$this->table.'</br>';
+        //echo '$this->cle = '.$this->cle.'</br>';
 
     }
 
     function connectBDD() {
-        echo 'on rentre dans connectBDD </br>';
+        //echo 'on rentre dans connectBDD </br>';
         include('config.php');
         try {
             $conn = new PDO($dsn, $user, $pwd);
-            echo 'connexion à la bdd réussie  </br>';
+            //echo 'connexion à la bdd réussie  </br>';
             return $conn;
         }
         
@@ -36,13 +36,13 @@ class Modele {
 
     function insert($object) {
         $conn=$this->connectBDD();
-        echo 'on rentre dans insert ';
+        //echo 'on rentre dans insert ';
         if ( $this->table == 'membres' ) {
-            echo 'on rentre dans le if membres </br>';
+            //echo 'on rentre dans le if membres </br>';
            try {
-                echo 'on rentre dans le try requete membre </br>';
+                //echo 'on rentre dans le try requete membre </br>';
                 $query='INSERT INTO membres(name, firstname, email, pwd) VALUES (:name, :firstname, :email, :pwd)';
-                echo '$query est égale à '.$query.'<br/>';
+                //echo '$query est égale à '.$query.'<br/>';
                 $q= $conn->prepare($query);
                 $q->execute([
                     'name' => $object->getName(),
@@ -61,9 +61,9 @@ class Modele {
         }
         elseif( $this->table == 'images' ) {
             try{
-                echo 'on rentre dans le try de insert image </br>';
+                //echo 'on rentre dans le try de insert image </br>';
                 $query='INSERT INTO images(numuser, nameimg, adressimg) VALUES (:numuser, :nameimg, :adressimg)';
-                echo '$query est égale à '.$query.'</br>';
+                //echo '$query est égale à '.$query.'</br>';
                 $q= $conn->prepare($query);
                 //$q->execute($object->nameImg,$object->adressImg);
                 $q->execute([
@@ -116,10 +116,10 @@ class Modele {
                 $r=$conn->prepare($query);
                 $r->bindValue(':numuser',$this->cle);
                 $r->execute();
-                echo '$query ='.$query;
+                //echo '$query ='.$query;
                 //$r=$conn->query($query);
                 $result=$r->fetchAll();//(PDO::FETCH_ASSOC);
-                var_dump($result); echo '$result dans find image';
+                //var_dump($result); echo '$result dans find image';
                 return $result;
                 
             }   
@@ -139,22 +139,22 @@ class Modele {
     
 
     function update($champs,$data,$num) {
-        echo 'on rentre dans la methode update </br>';
+        //echo 'on rentre dans la methode update </br>';
         $conn=$this->connectBDD();
         if ($this->table=='membres') {
             try {
-                echo 'on rentre dans le try de la table membres </br>';
+                //echo 'on rentre dans le try de la table membres </br>';
                 $query="UPDATE $this->table SET $champs = :data WHERE numuser = :numuser";
-                echo '$query est égale à '.$query.'</br>';
-                echo 'data est égale à '.$data.'</br>';
-                echo '$this->cle est égale à '.$this->cle.'</br>';
+                //echo '$query est égale à '.$query.'</br>';
+                //echo 'data est égale à '.$data.'</br>';
+                //echo '$this->cle est égale à '.$this->cle.'</br>';
                 $q= $conn->prepare($query);
-                echo 'prepare ok </br>';
+                //echo 'prepare ok </br>';
                 $q->execute(array(
                     'data' => $data,
                     'numuser' => $num
                 ));
-                echo '$q est passé </br>';
+                //echo '$q est passé </br>';
                 return true;
             }
             catch (PDOException $e) {
@@ -234,48 +234,30 @@ class Modele {
 
     function pas_de_cookie($error,$email,$pwd_connexion) {
 
-       // include 'config.php';
-            
-        
-    /*
-        if ($_POST['submit']) {
-            if (empty($email) OR  empty($pwd_connexion)){
-                $error=true;
-                return $error;
+        $conn=$this->connectBDD();
+        $query=" SELECT email,pwd FROM membres WHERE email='$email';"; 
+        try {
                 
-                }
-            else {
-            */
-                $conn=$this->connectBDD();
-    
-                $query=" SELECT email,pwd FROM membres WHERE email='$email';"; 
-    
-                try {
-                
-                    $count = $conn->query($query);
-                    foreach ($count as $row) {
+            $count = $conn->query($query);
+            foreach ($count as $row) {
                         //echo 'email en base de donnée = '.$row['email'].'</br>';
                         //echo 'mot de passe en base de donnée '.$row['pwd'].'</br>';
-                        if (($row['pwd']==$pwd_connexion) AND ($row['email']==$email)) {
-    
-                            echo 'connexion réussi </br>';
-                            setcookie('email',$email,time()+3600);
-                           // ob_end_flush();
-                            echo 'cookie créé = '.$_COOKIE['email'].'</br>';
-                            $cookie=$_COOKIE['email'];
-                            var_dump($_COOKIE['email']);
-                            return true;
+                if (($row['pwd']==$pwd_connexion) AND ($row['email']==$email)) {
+                    setcookie('email',$email,time()+3600);
+                    $cookie=$_COOKIE['email'];
+                    //var_dump($_COOKIE['email']);
+                    return true;
             
-                        }  
+                }  
                         
                     
-                    }
+            }
     
                 
                 }
-                catch (PDOException $e) {
-                    echo 'la requete a echoué : ' . $e->getMessage();        
-                }
+            catch (PDOException $e) {
+                echo 'la requete a echoué : ' . $e->getMessage();        
+            }
                 
             
             //}
@@ -286,18 +268,18 @@ class Modele {
 
         function getMembre($email) {
             $conn=$this->connectBDD();
-            echo 'on rentre dans getMembre </br>';
-            echo '$email est  égale à '.$email.'</br>';
+            //echo 'on rentre dans getMembre </br>';
+            //echo '$email est  égale à '.$email.'</br>';
             try{
-                echo  'on rentre dans le try de membres </br>';
+                //echo  'on rentre dans le try de membres </br>';
                 $query="SELECT * FROM membres WHERE email='$email'";
-                echo '$query est égale à '.$query.'</br>';
+                //echo '$query est égale à '.$query.'</br>';
                 $r=$conn->query($query);
-                echo '$r est égale à ';
-                var_dump($r);
+                //echo '$r est égale à ';
+                //var_dump($r);
                 //$result=$r->fetch();
                 foreach ($r as $row) {
-                    echo 'numuser est égale à '.$row['numuser'].'</br>';
+                    //echo 'numuser est égale à '.$row['numuser'].'</br>';
                     $membre=new Membre($row['numuser'],$row['name'],$row['firstname'],$row['email'],$row['pwd']);
                     return $membre;
                     
