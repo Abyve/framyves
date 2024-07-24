@@ -98,49 +98,52 @@ class Vue {
                                 <div>
                                     <table class="table">';
                        ;
-                       $table='';
-                        foreach ($images as $key => $value) {
-                            //echo 'on rentre le foreach 1 <br />';
-                            //foreach($value as $val) {
-                                //echo 'on rentre dans le foreach 2 <br />';
-                                //$i++;
+                        $table='';
+                        if (!empty($images)){
+                            foreach ($images as $key => $value) {
+                                //echo 'on rentre le foreach 1 <br />';
+                                //foreach($value as $val) {
+                                    //echo 'on rentre dans le foreach 2 <br />';
+                                    //$i++;
+                                    
+                                    
+                                    $adressImg[]=$value['adressimg'];
+                                    //var_dump($adressImg); echo '</br> vardump de $adressImg<br />';
+                                    $numImg[] = $value['numimg'];
+                                    //var_dump($numImg);
+                                    //echo 'var dump de numImmg <br />';
+                                }
                                 
-                                
-                                $adressImg[]=$value['adressimg'];
-                                //var_dump($adressImg); echo '</br> vardump de $adressImg<br />';
-                                $numImg[] = $value['numimg'];
-                                //var_dump($numImg);
-                                //echo 'var dump de numImmg <br />';
-                            }
-                                
-                        for ($i=0;$i<=count($adressImg)-1;$i++)
-                        {   //echo $i.'$i <br />';
-                            if($i%2==0){$table=$table.'
-                                        <tr>';}
-                                    $table=$table.'
-                                            <td>    
-                                                <img src="'.$adressImg[$i].'" width=160 height=160.>; 
-                                            </td>
-                                            <td>
-                                                <a href="index-6-'.$numImg[$i].'"> Supp Image </a>
-                                            </td>';
-                            if($i%2>0){$table=$table.'
-                                        </tr>';}
-                                        //var_dump($numImg);
-                                        //echo 'var dump de numImmg <br />';
-                                //if ($i>=5) {echo'<br />';$i=0;};
-                                //echo '</td></tr>';
-                                
+                            for ($i=0;$i<=count($adressImg)-1;$i++)
+                            {   //echo $i.'$i <br />';
+                                if($i%2==0){$table=$table.'
+                                            <tr>';}
+                                        $table=$table.'
+                                                <td>    
+                                                    <img src="'.$adressImg[$i].'" width=160 height=160.>; 
+                                                </td>
+                                                <td>
+                                                    <a href="index-6-'.$numImg[$i].'"> Supp Image </a>
+                                                </td>';
+                                if($i%2>0){$table=$table.'
+                                            </tr>';}
+                                            //var_dump($numImg);
+                                            //echo 'var dump de numImmg <br />';
+                                    //if ($i>=5) {echo'<br />';$i=0;};
+                                    //echo '</td></tr>';
+                                    
                         
                             
-                            //echo 'adresse image est égale à ';var_dump($adressImage);
-                           //echo '<img src="'.$adressImage.'" width=60 height=60.>';
+                                //echo 'adresse image est égale à ';var_dump($adressImage);
+                            //echo '<img src="'.$adressImage.'" width=60 height=60.>';
+                            }
                         }
                         $finTable='
                                 </table>
                             </div>
                         </div>
                     </div>';
+                            
                         $this->rendu=$this->rendu.$tableImgDiv.$table.$finTable;
 
                         //echo 'j affiche les images de la bdd';

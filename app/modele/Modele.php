@@ -112,14 +112,17 @@ class Modele {
         }
         elseif ($this->table == 'images') {
             try{
-                $query="SELECT * FROM $this->table WHERE :numuser LIMIT 10";
+                //echo '$this->cle dans modele find ='.$this->cle;
+                $query="SELECT numimg, numuser, nameimg, adressimg FROM $this->table WHERE numuser=:numuser LIMIT 10";
                 $r=$conn->prepare($query);
+                
                 $r->bindValue(':numuser',$this->cle);
+                //echo '$this->cle dans modele find apres prepare ='.$this->cle;
                 $r->execute();
                 //echo '$query ='.$query;
                 //$r=$conn->query($query);
                 $result=$r->fetchAll();//(PDO::FETCH_ASSOC);
-                //var_dump($result); echo '$result dans find image';
+                //var_dump($result); echo '$result modele->find image';
                 return $result;
                 
             }   

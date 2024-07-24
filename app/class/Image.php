@@ -9,11 +9,11 @@ class Image {
     private $adressImg;
 
     function __construct($nu, $n, $a){
-        echo'on rentre dans le construct de Image </br>';
+        //echo'on rentre dans le construct de Image </br>';
         $this->numUser=$nu;
         $this->nameImg=$n;
         $this->adressImg=$a;
-        echo 'construct de image ok </br>';
+        //echo 'construct de image ok </br>';
     }
 #setters
     function setNameImg($n) 

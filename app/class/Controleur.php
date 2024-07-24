@@ -143,15 +143,15 @@ class Controleur {
                 $jeton=rand(1,9999);
                 $finfo=finfo_open(FILEINFO_MIME_TYPE);
                 $mimeType=finfo_file($finfo, $_FILES['upload_files']['tmp_name']);
-                echo ' $mimeType ';
-                var_dump($mimeType);
+                //echo ' $mimeType ';
+                //var_dump($mimeType);
                
                 $verifMimeType=true;
 
                 if (($mimeType=='image/png') OR ($mimeType=='image/jpeg')){$verifMimeType=true;}
-                echo '$verifMimeType ='.$verifMimeType.'<br />';
+                //echo '$verifMimeType ='.$verifMimeType.'<br />';
                 $dossier='upload/'.$cookie.'/';
-                echo '$dossier = '.$dossier;
+                //echo '$dossier = '.$dossier;
                 
                 if (!file_exists($dossier)) {
 
@@ -176,7 +176,7 @@ class Controleur {
                     $numUser=$membre->getNumUser();
                     $adressImg=$dossier.$fichier;
 
-                    echo 'adressImg dans fichier : '.$adressImg.'<br />';
+                    //echo 'adressImg dans fichier : '.$adressImg.'<br />';
                     $i= new Image($numUser, $fichier,$adressImg);
                     $mo->insert($i);
                     $result='ajout image bdd ok ';
