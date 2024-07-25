@@ -165,7 +165,7 @@ class Vue {
     //echo $this->rendu;
     echo $this->rendu.$this->footer;
     //echo 'apres point d arret';
-     //         phpinfo();
+    //      phpinfo();
     }
 
     function inscription($err,$email,$nom,$prenom,$pwd_form) {

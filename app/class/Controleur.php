@@ -98,7 +98,15 @@ class Controleur {
                         echo '$membre->pwd '.$membre->getPwd().'</br>';
                         echo '$error = '.var_dump($error).'</br>';
                         $m=new Modele('membres');
-                        $m->insert($membre);
+                        $code=12345678;
+                        $sujet='Verification de votre email';
+                        $message='Votre inscription sur notre site est validé \r\n';
+                        $mailSend=mail($email, $sujet, $message);
+                        var_dump($mailSend);
+                        if ($mailSend){
+                            echo 'mail envoyé membre enregistre en bdd';
+                            $m->insert($membre);
+                        }
                 }
             }
             $vue=new Vue();
