@@ -1,4 +1,5 @@
 <?php
+include('../controleur/*');
 
 class FrontController {
 
@@ -41,7 +42,8 @@ class FrontController {
                             return true;
                         case 2 :
                             echo 'on rentre dans le case 2';
-                            $match=$con->inscription();
+                            $match=new ControleurInscription;
+                            $match->render();
                             return true;
                         case 3 :
                             $match=$con->connexion();
