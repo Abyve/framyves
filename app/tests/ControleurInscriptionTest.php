@@ -1,6 +1,6 @@
 <?php
 use PHPUnit\Framework\TestCase;
-include('../class/controleur/ControleurInscription.php');
+include '../class/controleur/ControleurInscription.php';
 class ControleurInscriptionTest extends TestCase
 {
 
@@ -10,8 +10,8 @@ class ControleurInscriptionTest extends TestCase
 
     public function testObjet(){
 
-        $actual=new ControleurInscription;
-        $this->assertSame('',$actual->nom);
+        $actual=new ControleurInscription();
+        $this->assertTrue($actual->error);
 
 
 

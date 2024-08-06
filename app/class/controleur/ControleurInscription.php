@@ -1,5 +1,5 @@
 <?php
-include('../vue/VueInscription.php');
+//include('../vue/VueInscription.php');
 
 class ControleurInscription {
 
@@ -10,6 +10,7 @@ class ControleurInscription {
     private $error;
 
     function __construct(){
+        $this->error=false;
         if (isset($_POST['email'])) { 
             $this->email=(filter_var(htmlspecialchars($_POST['email']),FILTER_VALIDATE_EMAIL));
         } 
@@ -34,6 +35,7 @@ class ControleurInscription {
         else {
             $this->error=true;
         };
+        
     function render() {
 
         $vue=new vueInscription($this->email, $this->nom, $this->prenom, $this->pwd, $this->error)                        
