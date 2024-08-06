@@ -1,18 +1,19 @@
 <?php
-//include('../vue/VueInscription.php');
+include('../vue/VueInscription.php');
 
 class ControleurInscription {
 
-    private $email;
-    private $nom;
-    private $prenom;
-    private $pwd;
-    private $error;
+    private $email ;
+    private $nom ;
+    private $prenom ;
+    private $pwd ;
+    private $error ;
 
-    function __construct(){
-        $this->error=false;
+    public function __construct() {
+        echo 'on rentre dans le constructeur de ControleurInscription';
+        $this->error=false ;
         if (isset($_POST['email'])) { 
-            $this->email=(filter_var(htmlspecialchars($_POST['email']),FILTER_VALIDATE_EMAIL));
+            $this->email=(filter_var(htmlspecialchars(£_POST["email"]),FILTER_VALIDATE_EMAIL));
         } 
         else {
             $this->error=true;
@@ -34,9 +35,15 @@ class ControleurInscription {
         } 
         else {
             $this->error=true;
-        };
-        
-    function render() {
+        }
+    }
+    public function getError() {
+
+        return $this->error;
+
+    }
+      
+    public function render() {
 
         $vue=new vueInscription($this->email, $this->nom, $this->prenom, $this->pwd, $this->error)                        
         ;
@@ -45,7 +52,7 @@ class ControleurInscription {
 
 
 
-    }
+
      
     
     
