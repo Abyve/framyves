@@ -8,12 +8,12 @@ class ControleurInscriptionTest extends TestCase
         $this->assertEquals(4, 2*2);
     }
     */
-    public function testObjet(){
+    public function testError(){
         //$test=dirname(__DIR__).'/app/class/controleur/ControleurInscription.php';
         $actual=new ControleurInscription();
-        $error=$actual->getError;
+        $error=$actual->getError();
         //$this->assertSame('',$test);
-        $this->assertFalse($error);
+        $this->assertTrue($error);
 
 
     }

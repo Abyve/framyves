@@ -1,1 +1,1 @@
-{"version":1,"defects":{"ControleurInscriptionTest::testObjet":7},"times":{"ControleurInscriptionTest::testMultiplication":0.003,"UselessTest::testMultiplication":0,"ControleurInscriptionTest::testObjet":0.098}}
+{"version":1,"defects":{"ControleurInscriptionTest::testObjet":7},"times":{"ControleurInscriptionTest::testMultiplication":0.003,"UselessTest::testMultiplication":0,"ControleurInscriptionTest::testObjet":0.003,"ControleurInscriptionTest::testError":0.003}}

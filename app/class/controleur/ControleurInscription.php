@@ -1,5 +1,5 @@
 <?php
-include('../vue/VueInscription.php');
+include(dirname(__DIR__).'/vue/VueInscription.php');
 
 class ControleurInscription {
 
@@ -10,32 +10,30 @@ class ControleurInscription {
     private $error ;
 
     public function __construct() {
-        echo 'on rentre dans le constructeur de ControleurInscription';
-        $this->error=false ;
+        echo 'on est dans le construct de ControleurInscrption';
+        $this->error=true ;
+        echo $this->error;
         if (isset($_POST['email'])) { 
             $this->email=(filter_var(htmlspecialchars(£_POST["email"]),FILTER_VALIDATE_EMAIL));
+            $this->error=false;
         } 
-        else {
-            $this->error=true;
-        }
+       
         if (isset($_POST['nom'])) { 
             $this->nom=htmlspecialchars($_POST['nom']);
+            $this->error=false;
         } 
-        else {
-            $this->error=true;
-        }
+       
         if (isset($_POST['prenom'])) { 
             $this->prenom=htmlspecialchars($_POST['prenom']);
+            $this->error=false;
         } 
-        else {
-            $this->prenom='';
-        };
+        
         if (isset($_POST['pwd'])) { 
             $this->pwd=htmlspecialchars($_POST['pwd']);
+            $this->error=false;
         } 
-        else {
-            $this->error=true;
-        }
+       
+        echo $this->error;
     }
     public function getError() {
 
@@ -44,11 +42,24 @@ class ControleurInscription {
     }
       
     public function render() {
-
-        $vue=new vueInscription($this->email, $this->nom, $this->prenom, $this->pwd, $this->error)                        
-        ;
         
+        $vue=new VueInscription($this->email, $this->nom, $this->prenom, $this->pwd, $this->error) ;                       
+        $vue->showForm();
     }
+        
+    public function insert() {
+        $data=array();
+        if ( (!empty($this->email)) && (!empty($this->nom)) && (!empty($this->prenom)) && (!empty($this->pwd)) && (!($this->error))) {
+            $data['email'] = $this->email;
+            $data['nom'] = $this->nom;
+            $data['prenom'] = $this->prenom;
+            $data['pwd'] = $this->pwd;
+            echo 'insertion en bdd à faire ';
+        }
+    }
+      
+
+
 
 
 

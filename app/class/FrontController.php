@@ -1,5 +1,5 @@
 <?php
-include  __DIR__.'/controleur/*';
+include __DIR__.'/controleur/ControleurInscription.php'; 
 
 class FrontController {
 
@@ -41,8 +41,18 @@ class FrontController {
                             $match=$con->index($this->action);
                             return true;
                         case 2 :
-                            echo 'on rentre dans le case 2';
+                            /*echo 'on rentre dans le case 2';
+                            $array = array(
+                                "foo" => "bar",
+                                "bar" => "foo",
+                            );
+                            //echo is_file(__DIR__.'/controleur/ControleurInscription.php');
+                            
+                            
+                            var_dump($array);
+                            */
                             $match=new ControleurInscription();
+                            var_dump($_POST);
                             $match->render();
                             return true;
                         case 3 :
