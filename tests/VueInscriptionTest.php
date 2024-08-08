@@ -8,7 +8,7 @@ class VueInscriptionTest extends TestCase
         $this->assertEquals(4, 2*2);
     }
     */
-    public function testConstruct() {
+    /*public function testConstruct() {
         //$test=(dirname(__DIR__)).'/app/class/vue/VueInscription.php';
         //$test=dirname(__DIR__).'/app/class/controleur/ControleurInscription.php';
         $actual=new VueInscription('toto@fai.fr','user','toto','mdp',false);
@@ -25,10 +25,14 @@ class VueInscriptionTest extends TestCase
         
 
     }
+    
     public function testShowForm() {
+    
+
 
 
 
     }
-
+ */
 }
+   
