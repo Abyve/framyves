@@ -57,13 +57,13 @@ class ControleurInscription {
             $vue->showForm($this->email, $this->nom, $this->prenom, $this->getPwd, $this->error);
         }   
         else {
-            $this->insert();
+           
             $vue=new VueInscription() ;                       
             $vue->showSuccess();
 
         }
     }
-        public function insert() {
+        public function insert():boolean {
         $data=array();
         if ( (!empty($this->email)) && (!empty($this->nom)) && (!empty($this->prenom)) && (!empty($this->pwd)) && (!($this->error))) {
             $data['email'] = $this->email;

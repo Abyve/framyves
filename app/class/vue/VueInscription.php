@@ -52,36 +52,44 @@ class VueInscription {
         echo '<br />on rentre dans showForm de vueInscription';
         echo '<br />$e est égale '.$e;
         
-            echo '<br /> Erreur ! Merci de bien remplir tout le formulaire !';
-            $retour='
-                        <div id="conteneur">
-                            <form action="index.php?page=2&action=1" method="POST">
-                                <div>
-                                    <label for="email">Email : </label>
-                                    <input type="text" id="email" name="email" value="'.$e.'" />
-                                </div>
-                                <div>
-                                    <label for="nom">Nom : </label>
-                                    <input type="text" id="nom" name="nom" value="'.$n.'" />
-                                </div>
-                                <div>
-                                    <label for="prenom">Prénom : </label>
-                                    <input type="text" id="prenom" name="prenom" value="'.$p.'" />
-                                </div>
-                                <div>
-                                    <label for="pwd">Mot de passe </label>
-                                    <input type="text" id="pwd" name="pwd" value="'.$pwd.'" />
-                                </div>
-                                <div>
-                                    <label for="submit"></label>
-                                    <input type="submit" name="submit" id="submit" value="Envoyer" />
-                                </div>
-                            </form>
-                        </div>';
-        
+        if ($error){
+            echo '<br /> Erreur ! Merci de bien remplir tout le formulaire !'; 
+            }
+        $retour='
+                <div id="conteneur">
+                    <form action="index.php?page=2&action=1" method="POST">
+                        <div>
+                            <label for="email">Email : </label>
+                            <input type="text" id="email" name="email" value="'.$e.'" />
+                        </div>
+                        <div>
+                            <label for="nom">Nom : </label>
+                            <input type="text" id="nom" name="nom" value="'.$n.'" />
+                        </div>
+                        <div>
+                            <label for="prenom">Prénom : </label>
+                            <input type="text" id="prenom" name="prenom" value="'.$p.'" />
+                        </div>
+                        <div>
+                            <label for="pwd">Mot de passe </label>
+                            <input type="text" id="pwd" name="pwd" value="'.$pwd.'" />
+                        </div>
+                        <div>
+                            <label for="submit"></label>
+                            <input type="submit" name="submit" id="submit" value="Envoyer" />
+                        </div>
+                    </form>
+                </div>';
         echo $retour;
-        echo $error2;
+        //echo $error2;
         
     }
     
+    function showSuccess() {
+
+        $msg='Votre formulaire est correcte et il a été traité. Merci ';
+        echo $msg;
+
+
+    }
 }
