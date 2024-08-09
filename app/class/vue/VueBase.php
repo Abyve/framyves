@@ -7,6 +7,7 @@ class VueBase {
     protected $corps;
     protected $footer;
     protected $rendu;
+    protected $contenu;
     
     function __construct($c=null,$m='') {
        // echo 'on rentre dans la fonction construct de VueBase';
@@ -42,25 +43,39 @@ class VueBase {
                                     </p>
                                 </div> 
                             </div>';
-            $this->footer=  '
-                        <div class="row bg-danger">		
-                            <div class="col-8 md-2">			
-                                <p>Réalisé en 2023 par Yves Abiven au sein du CNAM 
-                                </p>				
-                            </div>					
-                            <div class="col-4">					
-                                <p class="md-2">				
-                                <img id="license" alt="license CCBYSA" src="./app/img/CCBYSA.png" />		
-                                </p>		
-                            </div>
+            $this->footer='
                         </div>
-                    </div>        
-                </body>
-            </html>';
-
+                            <div class="row bg-danger">		
+                                <div class="col-8 md-2">			
+                                    <p>Réalisé en 2023 par Yves Abiven au sein du CNAM 
+                                    </p>				
+                                </div>					
+                                <div class="col-4">					
+                                    <p class="md-2">				
+                                    <img id="license" alt="license CCBYSA" src="./app/img/CCBYSA.png" />		
+                                    </p>		
+                                </div>
+                            </div>
+                        </div>        
+                    </body>
+                </html>';
+            $this->contenu = '
+            <div class="col-12 col-md-10 bg-light">
+                <div>
+                    <h1> Bienvenue sur ma galerie d\'image </h1>
+                </div>
+            </div>';
+        
     }
     
-    protected function
+    protected function show() {
+
+
+        echo $this->corps.$this->contenu.$this->footer;
+
+
+    }
+}
     
     
     

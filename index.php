@@ -1,17 +1,20 @@
 <?php
 ob_start();
-include('app/class/FrontController.php');
-include('app/modele/Modele.php');
-include('app/class/Membre.php');
-include('app/class/Image.php');
-include('app/class/Vue.php');
-include('app/class/Controleur.php');
-//include('app/class/function/cookie.php');
+include_once('app/class/FrontController.php');
+include_once('app/modele/Modele.php');
+include_once('app/class/Membre.php');
+include_once('app/class/Image.php');
+include_once('app/class/Vue.php');
+include_once('app/class/Controleur.php');
+include_once ('app/class/controleur/ControleurInscription.php'); 
+include_once ('app/class/vue/VueInscription.php');
+
+//include_once('app/class/function/cookie.php');
 
 $page=htmlspecialchars(($_GET['page']));
 $action=htmlspecialchars(($_GET['action']));
 
-/* echo '$_GET[page] = '.$_GET['page'].' </br> $_GET[action] = '.$_GET['action'].' </br>';
+ /*echo '$_GET[page] = '.$_GET['page'].' </br> $_GET[action] = '.$_GET['action'].' </br>';
  echo '$page = '.$page.' </br> $action = '.$action.' </br>';
 var_dump($page);echo'</br>';
 */
@@ -23,4 +26,4 @@ $Fcontroller->match();
 
 
 //ob_end_flush();
-//include('test_modeles.php');
+//include_once('test_modeles.php');

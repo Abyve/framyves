@@ -1,12 +1,15 @@
 <?php
 
-class VueInscription {
+include 'VueBase.php' ;
 
-    private $email; 
-    private $nom ; 
-    private $preonom; 
-    private $pwd;
-    private $error;
+class VueInscription extends VueBase {
+
+    protected $email; 
+    protected $nom ; 
+    protected $preonom; 
+    protected $pwd;
+    protected $error;
+    protected $contenu;
 
     /*function __construct() {
        echo '<br />on rentre dans le constructuer de vueInscription';
@@ -48,48 +51,68 @@ class VueInscription {
         $this->pwd=$pwd;
     }    
     */
-    function showForm($e,$n,$p,$pwd,$error) {
+    function form($e,$n,$p,$pwd,$error):string {
         echo '<br />on rentre dans showForm de vueInscription';
         echo '<br />$e est égale '.$e;
-        
+        $msgError='';
         if ($error){
-            echo '<br /> Erreur ! Merci de bien remplir tout le formulaire !'; 
+            $msgError='<br /> Merci de bien remplir tout le formulaire !'; 
             }
-        $retour='
-                <div id="conteneur">
-                    <form action="index.php?page=2&action=1" method="POST">
-                        <div>
-                            <label for="email">Email : </label>
-                            <input type="text" id="email" name="email" value="'.$e.'" />
-                        </div>
-                        <div>
-                            <label for="nom">Nom : </label>
-                            <input type="text" id="nom" name="nom" value="'.$n.'" />
-                        </div>
-                        <div>
-                            <label for="prenom">Prénom : </label>
-                            <input type="text" id="prenom" name="prenom" value="'.$p.'" />
-                        </div>
-                        <div>
-                            <label for="pwd">Mot de passe </label>
-                            <input type="text" id="pwd" name="pwd" value="'.$pwd.'" />
-                        </div>
-                        <div>
-                            <label for="submit"></label>
-                            <input type="submit" name="submit" id="submit" value="Envoyer" />
-                        </div>
-                    </form>
-                </div>';
-        echo $retour;
+            $form='
+                
+                    <div class="col-12 col-md-10 bg-light">
+                        <form action="index.php?page=2&action=1" method="POST">
+                            <div>
+                                <label for="email">Email : </label>
+                                <input type="text" id="email" name="email" value="'.$e.'" />
+                            </div>
+                            <div>
+                                <label for="nom">Nom : </label>
+                                <input type="text" id="nom" name="nom" value="'.$n.'" />
+                            </div>
+                            <div>
+                                <label for="prenom">Prénom : </label>
+                                <input type="text" id="prenom" name="prenom" value="'.$p.'" />
+                            </div>
+                            <div>
+                                <label for="pwd">Mot de passe </label>
+                                <input type="text" id="pwd" name="pwd" value="'.$pwd.'" />
+                            </div>
+                            <div>
+                                <label for="submit"></label>
+                                <input type="submit" name="submit" id="submit" value="Envoyer" />
+                            </div>
+                        </form>
+                        <p>'.$msgError.'
+                        </p>    
+                    </div>';
+            $this->contenu=$form;
+            return $this->contenu;
         //echo $error2;
         
     }
     
-    function showSuccess() {
+    function formSuccess() {
 
-        $msg='Votre formulaire est correcte et il a été traité. Merci ';
-        echo $msg;
+        $msg='
+            <div class="col-12 col-md-10 bg-light">
+                Votre formulaire est correcte et il a été traité. Merci!
+            </div>';       
+        $this->contenu= $msg;
+        return $this->contenu;
+        
 
 
     }
+
+    function show() {
+
+        echo $this->corps.$this->contenu.$this->footer;
+
+    }
+
+
+
+
+
 }

@@ -1,5 +1,5 @@
 <?php
-include(dirname(__DIR__).'/vue/VueInscription.php');
+//include_once(dirname(__DIR__).'/vue/VueInscription.php');
 
 class ControleurInscription {
 
@@ -21,7 +21,7 @@ class ControleurInscription {
         echo '<br />$this->email = '.$this->email;
         $this->error=false;
         echo '<br />$this->error = '.$this->error;
-         echo $this->error;
+        echo $this->error;
         if ((!empty($_POST['email']))&& (!empty($_POST['nom'])) &&  (!empty($_POST['prenom']))&& (!empty($_POST['pwd']))) { 
             $this->email=(htmlspecialchars(filter_var($_POST["email"]),FILTER_VALIDATE_EMAIL));
             $this->error=false;
@@ -54,16 +54,17 @@ class ControleurInscription {
         echo 'dans render de controleur inscription $error ='.$this->error;
         if ($this->error){
             $vue=new VueInscription() ;                       
-            $vue->showForm($this->email, $this->nom, $this->prenom, $this->getPwd, $this->error);
+            $contenu=$vue->form($this->email, $this->nom, $this->prenom, $this->getPwd, $this->error);
+            $vue->show($contenu);
         }   
         else {
            
             $vue=new VueInscription() ;                       
-            $vue->showSuccess();
-
+            $contenu=$vue->formSuccess();
+            $vue->show($contenu);
         }
     }
-        public function insert():boolean {
+        public function insert() {
         $data=array();
         if ( (!empty($this->email)) && (!empty($this->nom)) && (!empty($this->prenom)) && (!empty($this->pwd)) && (!($this->error))) {
             $data['email'] = $this->email;
