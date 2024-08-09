@@ -61,6 +61,7 @@ class ControleurInscription {
            
             $vue=new VueInscription() ;                       
             $contenu=$vue->formSuccess();
+            $this->insert();
             $vue->show($contenu);
         }
     }
