@@ -13,7 +13,7 @@ class VueConnexion extends VueBase {
         $form='
                             <div class="col-12 col-md-10 bg-light">
                                 <div class="conteneurFormCon" >
-                                    <form action="index.php?page=2&action=1" method="POST">
+                                    <form action="index-3-1" method="POST">
                                         <div>
                                             <label for="email">Email : </label>
                                             <input type="text" id="email" name="email" value="'.$e.'" />
@@ -48,6 +48,8 @@ class VueConnexion extends VueBase {
 
 
     }
+
+    
 
     function show() {
 

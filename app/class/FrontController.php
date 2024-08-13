@@ -51,7 +51,7 @@ class FrontController {
                             var_dump($array);
                             */
                             $match=new ControleurInscription();
-                            //var_dump($_POST);
+                            var_dump($_POST);
                             $match->render();
                             return true;
                         case 3 :
