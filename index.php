@@ -9,6 +9,11 @@ include_once('app/class/Controleur.php');
 include_once ('app/class/controleur/ControleurInscription.php'); 
 include_once ('app/class/vue/VueInscription.php');
 
+//echo 'is file VueConnexion :'.is_file('app/class/vue/VueConnexion.php');
+//echo 'is file ControleurConnexion :'.is_file('app/class/controleur/ControleurConnexion.php');
+include_once ('app/class/controleur/ControleurConnexion.php'); 
+include_once ('app/class/vue/VueConnexion.php');
+
 //include_once('app/class/function/cookie.php');
 
 $page=htmlspecialchars(($_GET['page']));

@@ -60,7 +60,7 @@ class VueInscription extends VueBase {
             }
             $form='
                             <div class="col-12 col-md-10 bg-light">
-                                <form action="index.php?page=2&action=1" method="POST">
+                                <form action="index.php?page=3&action=1" method="POST">
                                     <div>
                                         <label for="email">Email : </label>
                                         <input type="text" id="email" name="email" value="'.$e.'" />
