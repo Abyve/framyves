@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 include dirname(__DIR__).'/app/class/controleur/ControleurConnexion.php';
 
 
-class ControleurInscriptionTest extends TestCase
+class ControleurConnexionTest extends TestCase
 {   
     public static function PostProvider(): array {   
         return [

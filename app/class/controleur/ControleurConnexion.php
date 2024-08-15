@@ -8,8 +8,8 @@ class ControleurConnexion {
 
 
     function __construct() {
-        echo 'on rentredans le construct de controleurConnexion <br />';
-        var_dump($_POST);
+        //echo 'on rentredans le construct de controleurConnexion <br />';
+        //var_dump($_POST);
         if ((!empty($_POST['email'])) && (!empty($_POST['pwd'])) && filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)) {
            $this->email=htmlspecialchars(filter_var($_POST['email'],FILTER_VALIDATE_EMAIL));
             $this->pwd=htmlspecialchars($_POST['pwd']);
@@ -20,9 +20,9 @@ class ControleurConnexion {
 
             $this->error=true;
         }
-        echo 'on sort du construct de controleur connexion <br />
+        /*echo 'on sort du construct de controleur connexion <br />
               $this->error= '.$this->error.'<br />';
-    }
+    */}
      //getter
      function getEmail() {
         return $this->email;
