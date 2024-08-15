@@ -23,6 +23,16 @@ class ControleurConnexion {
         echo 'on sort du construct de controleur connexion <br />
               $this->error= '.$this->error.'<br />';
     }
+     //getter
+     function getEmail() {
+        return $this->email;
+    }
+    function getPwd() {
+        return $this->pwd;
+    }
+    function getError() {
+        return $this->error;
+    }
 
     function render() {
 
