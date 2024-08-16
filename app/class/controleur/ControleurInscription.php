@@ -17,10 +17,10 @@ class ControleurInscription {
         if ((!empty($_POST["email"]) && filter_var($_POST["email"],FILTER_VALIDATE_EMAIL)) &&(!empty($_POST['nom'])) && (!empty($_POST['prenom'])) && (!empty($_POST['pwd'])) )
         { 
             $this->email=htmlspecialchars(filter_var($_POST["email"],FILTER_VALIDATE_EMAIL)); 
-            var_dump(filter_var($_POST["email"],FILTER_VALIDATE_EMAIL));
-            $this->nom=htmlspecialchars($_POST['nom']) ;
-            $this->prenom=htmlspecialchars($_POST['prenom']) ;
-            $this->pwd=htmlspecialchars($_POST['pwd']) ;
+            //var_dump(filter_var($_POST["email"],FILTER_VALIDATE_EMAIL));
+            $this->nom=htmlspecialchars(trim($_POST['nom'])) ;
+            $this->prenom=htmlspecialchars(trim($_POST['prenom'])) ;
+            $this->pwd=htmlspecialchars(trim($_POST['pwd'])) ;
             $this->error=false;
             
         } 
@@ -101,13 +101,26 @@ class ControleurInscription {
         }
     }
         public function insert() {
-        $data=array();
+        /*$data=array();
         if ( (!empty($this->email)) && (!empty($this->nom)) && (!empty($this->prenom)) && (!empty($this->pwd)) && (!($this->error))) {
             $data['email'] = $this->email;
             $data['nom'] = $this->nom;
             $data['prenom'] = $this->prenom;
             $data['pwd'] = $this->pwd;
             echo 'insertion en bdd à faire ';
+          */
+            $membre=new Membre($numU,$this->nom,$this->prenom,$this->email,$this->pwd);
+            $m=new Modele('membres');
+            $email=$this->email;
+            $sujet='Verification de votre email';
+            $message='Votre inscription sur notre site est validé ';
+            $mailSend=mail($email, $sujet, $message);
+            var_dump($mailSend);
+            if ($mailSend){
+                echo 'mail envoyé membre enregistre en bdd';
+                $m->insert($membre);
+            }
+            
         }
     }
       
@@ -129,4 +142,3 @@ class ControleurInscription {
     
 
 
-}

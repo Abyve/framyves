@@ -1,3 +1,10 @@
+/*
+ajout d'une contrainte d'unicite d'email sur la table membres
+*/
+ ALTER TABLE membres ADD CONSTRAINT unique_email UNIQUE(email);
+
+
+
 /* 
 ***LE 220523 script sql pour galerieimage*** 
 */

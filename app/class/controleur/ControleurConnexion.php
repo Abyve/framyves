@@ -12,7 +12,7 @@ class ControleurConnexion {
         //var_dump($_POST);
         if ((!empty($_POST['email'])) && (!empty($_POST['pwd'])) && filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)) {
            $this->email=htmlspecialchars(filter_var($_POST['email'],FILTER_VALIDATE_EMAIL));
-            $this->pwd=htmlspecialchars($_POST['pwd']);
+            $this->pwd=htmlspecialchars(trim($_POST['pwd']));
             $this->error=false;
         }
         else
@@ -44,7 +44,7 @@ class ControleurConnexion {
             $vue->show($contenu);
         }  
         else {
-           
+            
             $vue=new VueConnexion() ;                       
             $contenu=$vue->formSuccess();
             //$this->insert();
