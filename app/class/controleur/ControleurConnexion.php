@@ -45,10 +45,24 @@ class ControleurConnexion {
         }  
         else {
             
-            $vue=new VueConnexion() ;                       
-            $contenu=$vue->formSuccess();
+            echo 'dans le if pour tester l authentification <br />';                    
+            
             //$this->insert();
-            $vue->show($contenu);
+            $verifUtilisateur=new ControleurAuthentification($this->email, $this->pwd);
+            var_dump($verifUtilisateur);echo '<br />';
+            $verif =$verifUtilisateur->verif();
+            if ($verif==true) {
+                echo 'dans le if $verifUtilisateur';
+                 $vue=new VueConnecte($this->email, $this->pwd);
+                 $vue->show();
+                }
+            else {
+                echo 'dans le else $verifUtilisateur';
+                $vue=new VueConnexion() ;                       
+                $contenu=$vue->form($this->email, $this->pwd, $this->error);
+                $vue->show($contenu);
+            }
+
         }
         
     }
