@@ -1,17 +1,19 @@
 <?php
+/*
 use PHPUnit\Framework\TestCase;
 include (dirname(__DIR__)).'/app/class/vue/VueInscription.php';
+include (dirname(__DIR__)).'/app/class/controleur/ControleurInscription.php';
 class VueInscriptionTest extends TestCase
 {
-
-    /*public function testMultiplication(){
+    /*
+    public function testMultiplication(){
         $this->assertEquals(4, 2*2);
     }
-    */
-    /*public function testConstruct() {
+    
+    public function testConstruct() {
         //$test=(dirname(__DIR__)).'/app/class/vue/VueInscription.php';
         //$test=dirname(__DIR__).'/app/class/controleur/ControleurInscription.php';
-        $actual=new VueInscription('toto@fai.fr','user','toto','mdp',false);
+        $actual=new ControleurInscription('toto@fai.fr','user','toto','mdp',false);
         $actuEmail=$actual->getEmail();
         $actuNom=$actual->getNom();
         $actuPrenom=$actual->getPrenom();
@@ -33,6 +35,6 @@ class VueInscriptionTest extends TestCase
 
 
     }
- */
+
 }
-   
+*/?> 

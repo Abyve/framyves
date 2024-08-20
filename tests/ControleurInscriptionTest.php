@@ -3,7 +3,7 @@ declare(strict_types=1);
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 include dirname(__DIR__).'/app/class/controleur/ControleurInscription.php';
-    
+include dirname(__DIR__).'/app/class/vue/VueInscription.php';   
     class ControleurInscriptionTest extends TestCase
     {   
         public static function PostProvider(): array {   
@@ -32,6 +32,19 @@ include dirname(__DIR__).'/app/class/controleur/ControleurInscription.php';
             //$this->assertSame('',$test);
             $this->assertSame($errorExpected,$error);
         }
-    }
+        /*public function testInsert($email,$nom,$prenom,$pwd,$errorExpected) {
+            $_POST['email']=$email;
+            $_POST['nom']=$nom;
+            $_POST['prenom']=$prenom;
+            $_POST['pwd']=$pwd;
+            $actual=new ControleurInscription();
+            $=$actual->getError();
+            //$this->assertSame('',$test);
+            $this->assertSame($errorExpected,$error);
+
+
+
+        }
+    */}
     
 
