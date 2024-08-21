@@ -5,16 +5,23 @@ class ModeleAuthentification {
     private $pwd;
     
     function __construct($email, $pwd) {
-        echo 'dans le construct du modele authentification <br />';
+        //echo 'dans le construct du modele authentification <br />';
         $this->email=$email;
         $this->pwd=$pwd;
-        echo 'on sort du construct de modele authentifcation <br />';
+        //echo 'on sort du construct de modele authentifcation <br />';
 
 
+    } 
+    public function getEmail() {
+        return $this->email;
+    }
+    public function getPwd() {
+        return $this->pwd;
     }
 
+
     function connectBDD() {
-        echo 'on rentre dans connectBDD </br>';
+        //echo 'on rentre dans connectBDD </br>';
         include('config.php');
         try {
             $conn = new PDO($dsn, $user, $pwd);
@@ -28,18 +35,18 @@ class ModeleAuthentification {
         }
     }
     function chercheEmail() {
-        echo 'dans cherche email modele authentification <br />';
+        //echo 'dans cherche email modele authentification <br />';
         $conn=$this->connectBDD();
         try{
                 $query="SELECT email FROM membres WHERE email=:email";
-                echo $query .'<br />';
+                //echo $query .'<br />';
                 $r=$conn->prepare($query);
                 $email=$this->email;
                 $r->bindValue(':email',$email);
                 $r->execute();
                 //$r=$conn->query($query);
                 $result=$r->fetch();
-                echo 'vardump $result';
+                //echo 'vardump $result';
                 var_dump($result);
                 return $result;
                 
